@@ -95,5 +95,10 @@ $router->get('config',                   'ConfigController', 'index');
 $router->post('config',                  'ConfigController', 'update');
 
 // ─── Dispatch ────────────────────────────────────────────────────────────────
-$url = $_GET['url'] ?? '';
+// Derive the routable path from REQUEST_URI by stripping the installed base
+// path. This works whether the app is at the document root or in a subdirectory.
+$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+$basePath   = rtrim(parse_url(BASE_URL, PHP_URL_PATH) ?? '', '/');
+$url        = ltrim(substr($requestUri, strlen($basePath)), '/');
+
 $router->dispatch($url);
