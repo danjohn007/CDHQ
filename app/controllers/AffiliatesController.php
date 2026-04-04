@@ -49,6 +49,8 @@ class AffiliatesController extends Controller {
             'email'       => trim($_POST['email']       ?? ''),
             'phone'       => trim($_POST['phone']       ?? ''),
             'address'     => trim($_POST['address']     ?? ''),
+            'municipio'   => trim($_POST['municipio']   ?? ''),
+            'estado_mexico'=> trim($_POST['estado_mexico'] ?? ''),
             'state'       => 'PROSPECTO',
             'notes'       => trim($_POST['notes']       ?? ''),
             'created_at'  => date('Y-m-d H:i:s'),
@@ -106,13 +108,15 @@ class AffiliatesController extends Controller {
         if (!$old) { $this->flash('error', 'Afiliado no encontrado.'); $this->redirect('affiliates'); }
 
         $data = [
-            'first_name'  => trim($_POST['first_name']  ?? ''),
-            'last_name'   => trim($_POST['last_name']   ?? ''),
-            'email'       => trim($_POST['email']       ?? ''),
-            'phone'       => trim($_POST['phone']       ?? ''),
-            'address'     => trim($_POST['address']     ?? ''),
-            'notes'       => trim($_POST['notes']       ?? ''),
-            'updated_at'  => date('Y-m-d H:i:s'),
+            'first_name'   => trim($_POST['first_name']    ?? ''),
+            'last_name'    => trim($_POST['last_name']     ?? ''),
+            'email'        => trim($_POST['email']         ?? ''),
+            'phone'        => trim($_POST['phone']         ?? ''),
+            'address'      => trim($_POST['address']       ?? ''),
+            'municipio'    => trim($_POST['municipio']     ?? ''),
+            'estado_mexico'=> trim($_POST['estado_mexico'] ?? ''),
+            'notes'        => trim($_POST['notes']         ?? ''),
+            'updated_at'   => date('Y-m-d H:i:s'),
         ];
 
         $model->update((int)$id, $data);

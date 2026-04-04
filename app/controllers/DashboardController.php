@@ -29,8 +29,10 @@ class DashboardController extends Controller {
             'new_prospects'       => $prospectModel->count('state = ?', ['NUEVO']),
         ];
 
-        $affiliatesByState = $affiliateModel->statsByState();
-        $monthlyIncome     = $paymentModel->monthlyIncome(12);
+        $affiliatesByState    = $affiliateModel->statsByState();
+        $affiliatesByEstadoMx = $affiliateModel->statsByEstadoMx();
+        $monthlyIncome        = $paymentModel->monthlyIncome(12);
+        $monthlyRegistrations = $affiliateModel->monthlyRegistrations(12);
         $upcomingEvents    = $eventModel->listUpcoming(5);
 
         // Recent activity log
@@ -42,12 +44,14 @@ class DashboardController extends Controller {
         );
 
         $this->view('dashboard/index', [
-            'title'             => 'Panel Principal',
-            'stats'             => $stats,
-            'affiliatesByState' => $affiliatesByState,
-            'monthlyIncome'     => $monthlyIncome,
-            'upcomingEvents'    => $upcomingEvents,
-            'recentActivity'    => $recentActivity,
+            'title'               => 'Panel Principal',
+            'stats'               => $stats,
+            'affiliatesByState'   => $affiliatesByState,
+            'affiliatesByEstadoMx'=> $affiliatesByEstadoMx,
+            'monthlyIncome'       => $monthlyIncome,
+            'monthlyRegistrations'=> $monthlyRegistrations,
+            'upcomingEvents'      => $upcomingEvents,
+            'recentActivity'      => $recentActivity,
         ]);
     }
 }

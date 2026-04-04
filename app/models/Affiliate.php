@@ -93,4 +93,26 @@ class Affiliate extends Model {
             "SELECT state, COUNT(*) AS total FROM affiliates GROUP BY state ORDER BY total DESC"
         );
     }
+
+    public function statsByEstadoMx(): array {
+        return $this->query(
+            "SELECT COALESCE(NULLIF(estado_mexico,''), 'Sin especificar') AS estado_mexico,
+                    COUNT(*) AS total
+             FROM affiliates
+             GROUP BY COALESCE(NULLIF(estado_mexico,''), 'Sin especificar')
+             ORDER BY total DESC
+             LIMIT 15"
+        );
+    }
+
+    public function monthlyRegistrations(int $months = 12): array {
+        return $this->query(
+            "SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) AS total
+             FROM affiliates
+             WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL ? MONTH)
+             GROUP BY month
+             ORDER BY month",
+            [$months]
+        );
+    }
 }

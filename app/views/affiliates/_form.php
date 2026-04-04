@@ -2,6 +2,14 @@
 // Shared form fields for create/edit affiliate
 $a = $affiliate ?? [];
 $v = fn(string $k) => htmlspecialchars((string)($a[$k] ?? ''));
+
+$estadosMx = [
+    'Aguascalientes','Baja California','Baja California Sur','Campeche','Chiapas',
+    'Chihuahua','Ciudad de México','Coahuila','Colima','Durango','Estado de México',
+    'Guanajuato','Guerrero','Hidalgo','Jalisco','Michoacán','Morelos','Nayarit',
+    'Nuevo León','Oaxaca','Puebla','Querétaro','Quintana Roo','San Luis Potosí',
+    'Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Yucatán','Zacatecas',
+];
 ?>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div>
@@ -23,6 +31,25 @@ $v = fn(string $k) => htmlspecialchars((string)($a[$k] ?? ''));
         <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
         <input type="tel" name="phone" value="<?= $v('phone') ?>"
                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Municipio</label>
+        <input type="text" name="municipio" value="<?= $v('municipio') ?>"
+               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm"
+               placeholder="Ej. Querétaro, Guadalajara…">
+    </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Estado de México</label>
+        <select name="estado_mexico"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-sm bg-white">
+            <option value="">— Seleccionar estado —</option>
+            <?php foreach ($estadosMx as $est): ?>
+            <option value="<?= htmlspecialchars($est) ?>"
+                <?= ($a['estado_mexico'] ?? '') === $est ? 'selected' : '' ?>>
+                <?= htmlspecialchars($est) ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
     </div>
 </div>
 <div class="mt-4">
