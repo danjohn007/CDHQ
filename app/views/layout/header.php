@@ -25,11 +25,23 @@
         }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
     <style>
         [x-cloak] { display: none !important; }
-        .sidebar-link { @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors; }
-        .sidebar-link:hover { @apply bg-indigo-700 text-white; }
-        .sidebar-link.active { @apply bg-indigo-700 text-white; }
+        /* Sidebar link – written as plain CSS so it works without Tailwind @apply processing */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            width: 100%;
+            transition: color 150ms, background-color 150ms;
+        }
+        .sidebar-link:hover { background-color: rgb(67 56 202); color: #fff; }
+        .sidebar-link.active { background-color: rgb(67 56 202); color: #fff; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen">

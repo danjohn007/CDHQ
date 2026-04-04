@@ -12,7 +12,8 @@ function navLink(string $href, string $label, string $icon, string $current, str
     $active = ($current === $path || strpos($current, $path . '/') === 0) && $path !== '';
     $class  = $active ? 'sidebar-link active' : 'sidebar-link text-indigo-200';
     return '<a href="' . BASE_URL . '/' . $href . '" class="' . $class . '">'
-         . '<span class="text-lg">' . $icon . '</span>' . htmlspecialchars($label)
+         . '<span class="w-5 flex-shrink-0 text-center">' . $icon . '</span>'
+         . '<span>' . htmlspecialchars($label) . '</span>'
          . '</a>';
 }
 ?>
@@ -33,40 +34,40 @@ function navLink(string $href, string $label, string $icon, string $current, str
 
     <!-- Nav -->
     <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1">
-        <?= navLink('dashboard', 'Panel Principal', '🏠', $baseStripped, BASE_URL) ?>
+        <?= navLink('dashboard', 'Panel Principal', '<i class="fas fa-home fa-fw"></i>', $baseStripped, BASE_URL) ?>
 
         <?php if (in_array($role, [ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS, ROLE_EJECUTIVO_PROSPECTOS])): ?>
         <p class="px-4 pt-3 pb-1 text-xs font-semibold uppercase text-indigo-400 tracking-wider">Afiliados</p>
-        <?= navLink('affiliates', 'Afiliados', '👥', $baseStripped, BASE_URL) ?>
-        <?= navLink('subscriptions', 'Membresías', '🪪', $baseStripped, BASE_URL) ?>
-        <?= navLink('credentials/1', 'Credenciales', '🎫', $baseStripped, BASE_URL) ?>
+        <?= navLink('affiliates', 'Afiliados', '<i class="fas fa-users fa-fw"></i>', $baseStripped, BASE_URL) ?>
+        <?= navLink('subscriptions', 'Membresías', '<i class="fas fa-id-card fa-fw"></i>', $baseStripped, BASE_URL) ?>
+        <?= navLink('credentials/1', 'Credenciales', '<i class="fas fa-address-card fa-fw"></i>', $baseStripped, BASE_URL) ?>
         <?php endif; ?>
 
         <?php if (in_array($role, [ROLE_SUPER_ADMIN, ROLE_ADMIN_FINANCIERO])): ?>
         <p class="px-4 pt-3 pb-1 text-xs font-semibold uppercase text-indigo-400 tracking-wider">Finanzas</p>
-        <?= navLink('financial', 'Finanzas', '💰', $baseStripped, BASE_URL) ?>
-        <?= navLink('reports', 'Reportes', '📊', $baseStripped, BASE_URL) ?>
+        <?= navLink('financial', 'Finanzas', '<i class="fas fa-dollar-sign fa-fw"></i>', $baseStripped, BASE_URL) ?>
+        <?= navLink('reports', 'Reportes', '<i class="fas fa-chart-bar fa-fw"></i>', $baseStripped, BASE_URL) ?>
         <?php endif; ?>
 
         <?php if (in_array($role, [ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS, ROLE_COORD_EVENTOS, ROLE_AFILIADO])): ?>
         <p class="px-4 pt-3 pb-1 text-xs font-semibold uppercase text-indigo-400 tracking-wider">Actividades</p>
-        <?= navLink('events', 'Eventos', '📅', $baseStripped, BASE_URL) ?>
+        <?= navLink('events', 'Eventos', '<i class="fas fa-calendar-alt fa-fw"></i>', $baseStripped, BASE_URL) ?>
         <?php endif; ?>
 
         <?php if (in_array($role, [ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS, ROLE_EJECUTIVO_PROSPECTOS])): ?>
         <p class="px-4 pt-3 pb-1 text-xs font-semibold uppercase text-indigo-400 tracking-wider">Prospección</p>
-        <?= navLink('prospects', 'Prospectos', '🔍', $baseStripped, BASE_URL) ?>
+        <?= navLink('prospects', 'Prospectos', '<i class="fas fa-user-plus fa-fw"></i>', $baseStripped, BASE_URL) ?>
         <?php endif; ?>
 
         <?php if (in_array($role, [ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS])): ?>
         <p class="px-4 pt-3 pb-1 text-xs font-semibold uppercase text-indigo-400 tracking-wider">Organización</p>
-        <?= navLink('council', 'Consejo', '🏛️', $baseStripped, BASE_URL) ?>
+        <?= navLink('council', 'Consejo', '<i class="fas fa-landmark fa-fw"></i>', $baseStripped, BASE_URL) ?>
         <?php endif; ?>
 
         <?php if ($role === ROLE_SUPER_ADMIN): ?>
         <p class="px-4 pt-3 pb-1 text-xs font-semibold uppercase text-indigo-400 tracking-wider">Administración</p>
-        <?= navLink('users', 'Usuarios', '👤', $baseStripped, BASE_URL) ?>
-        <?= navLink('config', 'Configuración', '⚙️', $baseStripped, BASE_URL) ?>
+        <?= navLink('users', 'Usuarios', '<i class="fas fa-user fa-fw"></i>', $baseStripped, BASE_URL) ?>
+        <?= navLink('config', 'Configuración', '<i class="fas fa-cog fa-fw"></i>', $baseStripped, BASE_URL) ?>
         <?php endif; ?>
     </nav>
 
