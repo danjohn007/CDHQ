@@ -17,6 +17,20 @@ foreach ($monthlyIncome as $row) {
     $incomeLabels[] = $row['month'];
     $incomeData[]   = (float)$row['total'];
 }
+
+$estadoMxLabels = [];
+$estadoMxData   = [];
+foreach ($affiliatesByEstadoMx as $row) {
+    $estadoMxLabels[] = $row['estado_mexico'];
+    $estadoMxData[]   = (int)$row['total'];
+}
+
+$regLabels = [];
+$regData   = [];
+foreach ($monthlyRegistrations as $row) {
+    $regLabels[] = $row['month'];
+    $regData[]   = (int)$row['total'];
+}
 ?>
 
 <!-- Stats Cards -->
@@ -42,9 +56,9 @@ foreach ($monthlyIncome as $row) {
     <?php endforeach; ?>
 </div>
 
-<!-- Charts Row -->
+<!-- Charts Row 1 -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-    <!-- Affiliates by State -->
+    <!-- Affiliates by Status -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <h2 class="text-sm font-semibold text-gray-700 mb-4">Afiliados por Estado</h2>
         <div class="relative h-56">
@@ -57,6 +71,25 @@ foreach ($monthlyIncome as $row) {
         <h2 class="text-sm font-semibold text-gray-700 mb-4">Ingresos Mensuales (últimos 12 meses)</h2>
         <div class="relative h-56">
             <canvas id="incomeChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Row 2 -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- Affiliates by Estado de México -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <h2 class="text-sm font-semibold text-gray-700 mb-4">Afiliados por Estado de México</h2>
+        <div class="relative h-56">
+            <canvas id="estadoMxChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Monthly Registrations -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <h2 class="text-sm font-semibold text-gray-700 mb-4">Nuevas Altas por Mes (últimos 12 meses)</h2>
+        <div class="relative h-56">
+            <canvas id="registrationsChart"></canvas>
         </div>
     </div>
 </div>
@@ -119,7 +152,7 @@ foreach ($monthlyIncome as $row) {
 </div>
 
 <script>
-// Affiliates by state - Doughnut
+// Affiliates by status - Doughnut
 (function() {
     const labels = <?= json_encode($stateLabels, JSON_UNESCAPED_UNICODE) ?>;
     const data   = <?= json_encode($stateData) ?>;
@@ -150,6 +183,48 @@ foreach ($monthlyIncome as $row) {
             }]},
             options: { responsive: true, maintainAspectRatio: false,
                        scales: { y: { beginAtZero: true } },
+                       plugins: { legend: { display: false } } }
+        });
+    }
+})();
+
+// Affiliates by Estado de México - Horizontal Bar
+(function() {
+    const labels = <?= json_encode($estadoMxLabels, JSON_UNESCAPED_UNICODE) ?>;
+    const data   = <?= json_encode($estadoMxData) ?>;
+    const ctx = document.getElementById('estadoMxChart');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'bar',
+            data: { labels, datasets: [{
+                label: 'Afiliados', data,
+                backgroundColor: '#0ea5e9', borderRadius: 4,
+            }]},
+            options: {
+                indexAxis: 'y',
+                responsive: true, maintainAspectRatio: false,
+                scales: { x: { beginAtZero: true, ticks: { precision: 0 } } },
+                plugins: { legend: { display: false } }
+            }
+        });
+    }
+})();
+
+// Monthly registrations - Line
+(function() {
+    const labels = <?= json_encode($regLabels) ?>;
+    const data   = <?= json_encode($regData) ?>;
+    const ctx = document.getElementById('registrationsChart');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'line',
+            data: { labels, datasets: [{
+                label: 'Nuevas Altas', data,
+                borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)',
+                borderWidth: 2, pointRadius: 4, fill: true, tension: 0.3,
+            }]},
+            options: { responsive: true, maintainAspectRatio: false,
+                       scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
                        plugins: { legend: { display: false } } }
         });
     }

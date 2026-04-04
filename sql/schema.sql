@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS `affiliates` (
     `email`            VARCHAR(160) NULL,
     `phone`            VARCHAR(30)  NULL,
     `address`          VARCHAR(255) NULL,
+    `municipio`        VARCHAR(80)  NULL COMMENT 'Municipio de residencia del afiliado',
+    `estado_mexico`    VARCHAR(80)  NULL COMMENT 'Estado de la República Mexicana',
     `state`            ENUM('PROSPECTO','ACTIVO','SUSPENDIDO','VENCIDO') NOT NULL DEFAULT 'PROSPECTO',
     `notes`            TEXT NULL,
     `created_at`       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -230,63 +232,129 @@ INSERT INTO `subscription_plans` (`name`, `description`, `price`, `duration_days
 ('Plan Semestral',         'Membresía por 6 meses. Ideal para evaluar los beneficios del consejo.',    450.00, 180, 1),
 ('Plan Corporativo Anual', 'Membresía para organizaciones y personas morales. Hasta 3 representantes.',1500.00, 365, 1);
 
--- Affiliates (sample 10)
-INSERT INTO `affiliates` (`affiliate_number`, `user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `state`) VALUES
-('CDHQ-2024-0001', NULL, 'Roberto',  'Hernández Castillo',  'roberto.hernandez@email.com', '4421234567', 'Av. Universidad 123, Querétaro, Qro.', 'ACTIVO'),
-('CDHQ-2024-0002', NULL, 'Patricia', 'Morales Sánchez',     'patricia.morales@email.com',  '4427654321', 'Blvd. Bernardo Quintana 456, Querétaro', 'ACTIVO'),
-('CDHQ-2024-0003', NULL, 'José',     'Gutiérrez Pérez',     'jose.gutierrez@email.com',    '4429876543', 'Calle Corregidora 789, Centro, Querétaro', 'ACTIVO'),
-('CDHQ-2024-0004', NULL, 'Laura',    'Jiménez Flores',      'laura.jimenez@email.com',     '4421357924', 'Privada Las Flores 12, El Marqués, Qro.', 'ACTIVO'),
-('CDHQ-2024-0005', NULL, 'Miguel',   'Delgado Ruiz',        'miguel.delgado@email.com',    '4422468013', 'Av. 5 de Febrero 321, Querétaro', 'ACTIVO'),
-('CDHQ-2024-0006', NULL, 'Carmen',   'Vázquez Luna',        'carmen.vazquez@email.com',    '4423579124', 'Calzada de los Arcos 654, Querétaro', 'SUSPENDIDO'),
-('CDHQ-2024-0007', NULL, 'Fernando', 'Cruz Medina',         'fernando.cruz@email.com',     '4424680235', 'Av. Tecnológico 987, Juriquilla, Qro.', 'VENCIDO'),
-('CDHQ-2024-0008', NULL, 'Daniela',  'Ramos Ortega',        'daniela.ramos@email.com',     '4425791346', 'Paseo de las Haciendas 147, Querétaro', 'ACTIVO'),
-('CDHQ-2024-0009', NULL, 'Alejandro','Torres Mendez',       'alejandro.torres@email.com',  '4426802457', 'Blvd. Villas del Mesón 258, Querétaro', 'PROSPECTO'),
-('CDHQ-2024-0010', NULL, 'Sofía',    'Fuentes García',      'sofia.fuentes@email.com',     '4427913568', 'Av. Ignacio Pérez 369, Querétaro', 'ACTIVO');
+-- Affiliates (sample 30 – national coverage, 2026 dates)
+INSERT INTO `affiliates` (`affiliate_number`, `user_id`, `first_name`, `last_name`, `email`, `phone`, `address`, `municipio`, `estado_mexico`, `state`, `created_at`) VALUES
+-- Querétaro
+('CDHQ-2026-0001', NULL, 'Roberto',   'Hernández Castillo',  'roberto.hernandez@email.com', '4421234567', 'Av. Universidad 123',              'Querétaro',          'Querétaro',          'ACTIVO',     '2026-01-05 09:00:00'),
+('CDHQ-2026-0002', NULL, 'Patricia',  'Morales Sánchez',     'patricia.morales@email.com',  '4427654321', 'Blvd. Bernardo Quintana 456',       'Querétaro',          'Querétaro',          'ACTIVO',     '2026-01-12 10:30:00'),
+('CDHQ-2026-0003', NULL, 'José',      'Gutiérrez Pérez',     'jose.gutierrez@email.com',    '4429876543', 'Calle Corregidora 789, Centro',     'Querétaro',          'Querétaro',          'ACTIVO',     '2026-01-20 11:00:00'),
+('CDHQ-2026-0004', NULL, 'Laura',     'Jiménez Flores',      'laura.jimenez@email.com',     '4421357924', 'Privada Las Flores 12',             'El Marqués',         'Querétaro',          'ACTIVO',     '2026-02-03 09:15:00'),
+('CDHQ-2026-0005', NULL, 'Miguel',    'Delgado Ruiz',        'miguel.delgado@email.com',    '4422468013', 'Av. 5 de Febrero 321',              'Corregidora',        'Querétaro',          'ACTIVO',     '2026-02-10 14:00:00'),
+('CDHQ-2026-0006', NULL, 'Carmen',    'Vázquez Luna',        'carmen.vazquez@email.com',    '4423579124', 'Calzada de los Arcos 654',          'Querétaro',          'Querétaro',          'SUSPENDIDO', '2026-02-18 08:45:00'),
+('CDHQ-2026-0007', NULL, 'Fernando',  'Cruz Medina',         'fernando.cruz@email.com',     '4424680235', 'Av. Tecnológico 987, Juriquilla',   'Querétaro',          'Querétaro',          'VENCIDO',    '2026-03-01 10:00:00'),
+('CDHQ-2026-0008', NULL, 'Daniela',   'Ramos Ortega',        'daniela.ramos@email.com',     '4425791346', 'Paseo de las Haciendas 147',        'Querétaro',          'Querétaro',          'ACTIVO',     '2026-03-08 11:30:00'),
+('CDHQ-2026-0009', NULL, 'Alejandro', 'Torres Mendez',       'alejandro.torres@email.com',  '4426802457', 'Blvd. Villas del Mesón 258',        'San Juan del Río',   'Querétaro',          'PROSPECTO',  '2026-03-15 16:00:00'),
+('CDHQ-2026-0010', NULL, 'Sofía',     'Fuentes García',      'sofia.fuentes@email.com',     '4427913568', 'Av. Ignacio Pérez 369',             'Querétaro',          'Querétaro',          'ACTIVO',     '2026-03-22 09:00:00'),
+-- Ciudad de México
+('CDHQ-2026-0011', NULL, 'Andrea',    'Ramírez Villanueva',  'andrea.ramirez@email.com',    '5512345678', 'Insurgentes Sur 1605, Col. San José','Benito Juárez',     'Ciudad de México',   'ACTIVO',     '2026-01-08 10:00:00'),
+('CDHQ-2026-0012', NULL, 'Carlos',    'Mendoza Espinoza',    'carlos.mendoza@email.com',    '5523456789', 'Av. Reforma 222, Cuauhtémoc',       'Cuauhtémoc',         'Ciudad de México',   'ACTIVO',     '2026-01-25 12:00:00'),
+('CDHQ-2026-0013', NULL, 'Verónica',  'López Castañeda',     'veronica.lopez@email.com',    '5534567890', 'Xochimilco 45, Coyoacán',           'Coyoacán',           'Ciudad de México',   'VENCIDO',    '2026-02-14 09:30:00'),
+-- Jalisco
+('CDHQ-2026-0014', NULL, 'Luis',      'Sánchez Barrera',     'luis.sanchez@email.com',      '3312345678', 'Av. Vallarta 3300, Zapopan',        'Zapopan',            'Jalisco',            'ACTIVO',     '2026-01-15 11:00:00'),
+('CDHQ-2026-0015', NULL, 'Mariana',   'Torres Ibáñez',       'mariana.torres@email.com',    '3323456789', 'López Cotilla 1018, GDL',           'Guadalajara',        'Jalisco',            'ACTIVO',     '2026-02-20 13:00:00'),
+('CDHQ-2026-0016', NULL, 'Ricardo',   'Flores Navarro',      'ricardo.flores@email.com',    '3334567890', 'Av. Revolución 150, Tlaquepaque',   'Tlaquepaque',        'Jalisco',            'PROSPECTO',  '2026-03-05 10:15:00'),
+-- Nuevo León
+('CDHQ-2026-0017', NULL, 'Sandra',    'García Moreno',       'sandra.garcia@email.com',     '8112345678', 'Av. Constitución 500, Monterrey',   'Monterrey',          'Nuevo León',         'ACTIVO',     '2026-01-18 09:00:00'),
+('CDHQ-2026-0018', NULL, 'Jorge',     'Martínez Rodríguez',  'jorge.martinez@email.com',    '8123456789', 'Lazaro Cárdenas 2400, San Pedro',   'San Pedro Garza García','Nuevo León',      'ACTIVO',     '2026-02-07 14:30:00'),
+-- Puebla
+('CDHQ-2026-0019', NULL, 'Elena',     'Castro Herrera',      'elena.castro@email.com',      '2221234567', 'Av. Juárez 2701, Puebla',           'Puebla',             'Puebla',             'ACTIVO',     '2026-01-22 10:00:00'),
+('CDHQ-2026-0020', NULL, 'Ernesto',   'Vargas Díaz',         'ernesto.vargas@email.com',    '2232345678', 'Blvd. Valsequillo 600, Puebla',     'Puebla',             'Puebla',             'VENCIDO',    '2026-02-28 11:00:00'),
+-- Guanajuato
+('CDHQ-2026-0021', NULL, 'Diana',     'Rojas Serrano',       'diana.rojas@email.com',       '4771234567', 'Blvd. Torres Landa 702, León',      'León',               'Guanajuato',         'ACTIVO',     '2026-02-01 09:30:00'),
+('CDHQ-2026-0022', NULL, 'Héctor',    'Peña Montoya',        'hector.pena@email.com',       '4732345678', 'Av. Insurgentes 200, GTO',          'Guanajuato',         'Guanajuato',         'ACTIVO',     '2026-03-12 10:00:00'),
+-- Veracruz
+('CDHQ-2026-0023', NULL, 'Gabriela',  'Silva Espinosa',      'gabriela.silva@email.com',    '2291234567', 'Av. Independencia 45, Veracruz',    'Veracruz',           'Veracruz',           'ACTIVO',     '2026-01-30 12:00:00'),
+-- Yucatán
+('CDHQ-2026-0024', NULL, 'Rodrigo',   'Núñez Alvarado',      'rodrigo.nunez@email.com',     '9991234567', 'Calle 60 x 55, Centro, Mérida',     'Mérida',             'Yucatán',            'ACTIVO',     '2026-02-15 11:15:00'),
+-- Sonora
+('CDHQ-2026-0025', NULL, 'Claudia',   'Medina Ríos',         'claudia.medina@email.com',    '6621234567', 'Blvd. Morelos 100, Hermosillo',     'Hermosillo',         'Sonora',             'ACTIVO',     '2026-03-03 09:00:00'),
+-- Chihuahua
+('CDHQ-2026-0026', NULL, 'Francisco', 'Ortega Peralta',      'francisco.ortega@email.com',  '6141234567', 'Av. Tecnológico 800, Chihuahua',    'Chihuahua',          'Chihuahua',          'ACTIVO',     '2026-01-10 10:00:00'),
+-- Oaxaca
+('CDHQ-2026-0027', NULL, 'Isabel',    'Cruz Guzmán',         'isabel.cruz@email.com',       '9511234567', 'Macedonio Alcalá 804, Oaxaca',      'Oaxaca de Juárez',   'Oaxaca',             'ACTIVO',     '2026-02-25 13:30:00'),
+-- Coahuila
+('CDHQ-2026-0028', NULL, 'Arturo',    'Luna Vega',           'arturo.luna@email.com',       '8441234567', 'Blvd. Constitución 200, Saltillo',  'Saltillo',           'Coahuila',           'PROSPECTO',  '2026-03-18 10:45:00'),
+-- Tamaulipas
+('CDHQ-2026-0029', NULL, 'Beatriz',   'Soto Acevedo',        'beatriz.soto@email.com',      '8341234567', 'Av. Hidalgo 150, Tampico',          'Tampico',            'Tamaulipas',         'ACTIVO',     '2026-03-25 09:30:00'),
+-- Michoacán
+('CDHQ-2026-0030', NULL, 'Óscar',     'Aguilar Romero',      'oscar.aguilar@email.com',     '4431234567', 'Guillermo Prieto 250, Morelia',     'Morelia',            'Michoacán',          'ACTIVO',     '2026-04-01 11:00:00');
 
--- Subscriptions (for active affiliates)
+-- Subscriptions (for active affiliates – 2026 dates)
 INSERT INTO `subscriptions` (`affiliate_id`, `plan_id`, `start_date`, `end_date`, `status`) VALUES
-(1, 1, '2024-01-15', '2025-01-14', 'ACTIVA'),
-(2, 1, '2024-02-01', '2025-01-31', 'ACTIVA'),
-(3, 1, '2024-03-10', '2025-03-09', 'ACTIVA'),
-(4, 2, '2024-04-01', '2024-09-27', 'VENCIDA'),
-(5, 1, '2024-04-15', '2025-04-14', 'ACTIVA'),
-(7, 1, '2023-06-01', '2024-05-31', 'VENCIDA'),
-(8, 3, '2024-05-01', '2025-04-30', 'ACTIVA'),
-(10,1, '2024-06-01', '2025-05-31', 'ACTIVA');
+(1,  1, '2026-01-05', '2027-01-04', 'ACTIVA'),
+(2,  1, '2026-01-12', '2027-01-11', 'ACTIVA'),
+(3,  1, '2026-01-20', '2027-01-19', 'ACTIVA'),
+(4,  2, '2026-02-03', '2026-08-02', 'ACTIVA'),
+(5,  1, '2026-02-10', '2027-02-09', 'ACTIVA'),
+(7,  1, '2026-03-01', '2026-03-31', 'VENCIDA'),
+(8,  3, '2026-03-08', '2027-03-07', 'ACTIVA'),
+(10, 1, '2026-03-22', '2027-03-21', 'ACTIVA'),
+(11, 1, '2026-01-08', '2027-01-07', 'ACTIVA'),
+(12, 1, '2026-01-25', '2027-01-24', 'ACTIVA'),
+(14, 1, '2026-01-15', '2027-01-14', 'ACTIVA'),
+(15, 2, '2026-02-20', '2026-08-19', 'ACTIVA'),
+(17, 1, '2026-01-18', '2027-01-17', 'ACTIVA'),
+(18, 3, '2026-02-07', '2027-02-06', 'ACTIVA'),
+(19, 1, '2026-01-22', '2027-01-21', 'ACTIVA'),
+(21, 1, '2026-02-01', '2027-01-31', 'ACTIVA'),
+(22, 1, '2026-03-12', '2027-03-11', 'ACTIVA'),
+(23, 1, '2026-01-30', '2027-01-29', 'ACTIVA'),
+(24, 2, '2026-02-15', '2026-08-14', 'ACTIVA'),
+(25, 1, '2026-03-03', '2027-03-02', 'ACTIVA'),
+(26, 1, '2026-01-10', '2027-01-09', 'ACTIVA'),
+(27, 1, '2026-02-25', '2027-02-24', 'ACTIVA'),
+(29, 1, '2026-03-25', '2027-03-24', 'ACTIVA'),
+(30, 1, '2026-04-01', '2027-03-31', 'ACTIVA');
 
--- Payments
+-- Payments (2026 dates)
 INSERT INTO `payments` (`affiliate_id`, `amount`, `type`, `method`, `reference`, `payment_date`, `notes`) VALUES
-(1, 800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2024-001', '2024-01-15', 'Pago anual'),
-(2, 800.00, 'MEMBRESIA', 'EFECTIVO',      NULL,            '2024-02-01', 'Pago anual'),
-(3, 800.00, 'MEMBRESIA', 'TARJETA',       'TRX-78432',    '2024-03-10', 'Pago anual'),
-(4, 450.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2024-004', '2024-04-01', 'Plan semestral'),
-(5, 800.00, 'MEMBRESIA', 'PAYPAL',        'PP-23456',     '2024-04-15', 'Pago anual'),
-(8,1500.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2024-008', '2024-05-01', 'Plan corporativo'),
-(10, 800.00,'MEMBRESIA', 'EFECTIVO',      NULL,            '2024-06-01', 'Pago anual'),
-(NULL, 2000.00,'DONACION','TRANSFERENCIA','DON-2024-001', '2024-07-20', 'Donación anónima al consejo'),
-(1,    150.00,'EVENTO',  'EFECTIVO',      NULL,            '2024-08-10', 'Evento de capacitación');
+(1,  800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-001', '2026-01-05', 'Pago anual'),
+(2,  800.00, 'MEMBRESIA', 'EFECTIVO',      NULL,            '2026-01-12', 'Pago anual'),
+(3,  800.00, 'MEMBRESIA', 'TARJETA',       'TRX-2026-003', '2026-01-20', 'Pago anual'),
+(4,  450.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-004', '2026-02-03', 'Plan semestral'),
+(5,  800.00, 'MEMBRESIA', 'PAYPAL',        'PP-2026-005',  '2026-02-10', 'Pago anual'),
+(8, 1500.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-008', '2026-03-08', 'Plan corporativo'),
+(10, 800.00, 'MEMBRESIA', 'EFECTIVO',      NULL,            '2026-03-22', 'Pago anual'),
+(11, 800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-011', '2026-01-08', 'Pago anual CDMX'),
+(12, 800.00, 'MEMBRESIA', 'TARJETA',       'TRX-2026-012', '2026-01-25', 'Pago anual CDMX'),
+(14, 800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-014', '2026-01-15', 'Pago anual GDL'),
+(15, 450.00, 'MEMBRESIA', 'EFECTIVO',      NULL,            '2026-02-20', 'Plan semestral GDL'),
+(17, 800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-017', '2026-01-18', 'Pago anual MTY'),
+(18,1500.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-018', '2026-02-07', 'Plan corporativo MTY'),
+(19, 800.00, 'MEMBRESIA', 'TARJETA',       'TRX-2026-019', '2026-01-22', 'Pago anual PUE'),
+(21, 800.00, 'MEMBRESIA', 'EFECTIVO',      NULL,            '2026-02-01', 'Pago anual GTO'),
+(22, 800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-022', '2026-03-12', 'Pago anual GTO'),
+(23, 800.00, 'MEMBRESIA', 'PAYPAL',        'PP-2026-023',  '2026-01-30', 'Pago anual VER'),
+(24, 450.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-024', '2026-02-15', 'Plan semestral YUC'),
+(25, 800.00, 'MEMBRESIA', 'EFECTIVO',      NULL,            '2026-03-03', 'Pago anual SON'),
+(26, 800.00, 'MEMBRESIA', 'TARJETA',       'TRX-2026-026', '2026-01-10', 'Pago anual CHH'),
+(27, 800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-027', '2026-02-25', 'Pago anual OAX'),
+(29, 800.00, 'MEMBRESIA', 'EFECTIVO',      NULL,            '2026-03-25', 'Pago anual TAM'),
+(30, 800.00, 'MEMBRESIA', 'TRANSFERENCIA', 'REF-2026-030', '2026-04-01', 'Pago anual MICH'),
+(NULL, 3000.00,'DONACION','TRANSFERENCIA','DON-2026-001',  '2026-02-14', 'Donación Día Internacional de los Derechos'),
+(1,    150.00,'EVENTO',  'EFECTIVO',       NULL,            '2026-03-10', 'Evento de capacitación');
 
--- Events
+-- Events (2026 dates)
 INSERT INTO `events` (`name`, `description`, `type`, `date`, `end_date`, `capacity`, `venue`, `status`, `created_by`) VALUES
-('Foro de Derechos Humanos Querétaro 2024',
- 'Encuentro anual de organizaciones civiles para analizar el estado de los derechos humanos en Querétaro. Contaremos con ponentes nacionales e internacionales.',
- 'PRESENCIAL', '2024-09-15 09:00:00', '2024-09-15 18:00:00', 200,
+('Foro Nacional de Derechos Humanos 2026',
+ 'Encuentro anual de organizaciones civiles para analizar el estado de los derechos humanos en México. Ponentes nacionales e internacionales.',
+ 'PRESENCIAL', '2026-02-20 09:00:00', '2026-02-20 18:00:00', 300,
  'Centro de Convenciones Querétaro, Blvd. Bernardo Quintana 9001', 'FINALIZADO', 1),
 ('Taller: Mecanismos de Defensa Jurídica',
  'Taller práctico sobre herramientas legales para la defensa de derechos humanos. Cupo limitado.',
- 'PRESENCIAL', '2024-10-22 10:00:00', '2024-10-22 14:00:00', 30,
+ 'PRESENCIAL', '2026-03-05 10:00:00', '2026-03-05 14:00:00', 30,
  'Sala de capacitación CDHQ, Centro Histórico', 'FINALIZADO', 1),
 ('Webinar: Derechos Digitales y Privacidad',
  'Sesión virtual sobre el derecho a la privacidad en el entorno digital y las herramientas para protegerlo.',
- 'VIRTUAL', '2024-11-05 17:00:00', '2024-11-05 19:00:00', 0,
- 'https://meet.jit.si/cdhq-webinar-nov2024', 'FINALIZADO', 4),
+ 'VIRTUAL', '2026-03-18 17:00:00', '2026-03-18 19:00:00', 0,
+ 'https://meet.jit.si/cdhq-webinar-mar2026', 'FINALIZADO', 4),
 ('Conferencia: Acceso a la Justicia para Grupos Vulnerables',
  'Análisis de las barreras que enfrentan grupos vulnerables para acceder a la justicia en México.',
- 'PRESENCIAL', '2025-02-14 10:00:00', NULL, 80,
+ 'PRESENCIAL', '2026-05-10 10:00:00', NULL, 80,
  'Auditorio de la Universidad Autónoma de Querétaro', 'PROGRAMADO', 1),
 ('Capacitación Interna: Sistema de Afiliación CDHQ',
- 'Sesión de capacitación para el equipo del consejo sobre el uso del nuevo sistema de afiliación.',
- 'HIBRIDO', '2025-03-01 09:00:00', '2025-03-01 13:00:00', 25,
+ 'Sesión de capacitación para el equipo del consejo sobre el uso del sistema de afiliación.',
+ 'HIBRIDO', '2026-05-22 09:00:00', '2026-05-22 13:00:00', 25,
  'Oficinas CDHQ / Enlace Teams', 'PROGRAMADO', 4);
 
 -- Event registrations (for completed events)

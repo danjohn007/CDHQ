@@ -2,8 +2,7 @@
 </div><!-- /main content area -->
 </div><!-- /flex container -->
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<!-- Chart.js loaded in header -->
 <script>
     // Mobile sidebar toggle
     const toggle  = document.getElementById('sidebar-toggle');
