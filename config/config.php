@@ -1,9 +1,9 @@
 <?php
 // ─── Database Configuration ───────────────────────────────────────────────────
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'cdhq');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
+define('DB_NAME', 'cdhq_sistema');
+define('DB_USER', 'cdhq_sistema');
+define('DB_PASS', '!(6IS_X3k,EO');
 define('DB_CHARSET', 'utf8mb4');
 
 // ─── Auto-detect BASE_URL ─────────────────────────────────────────────────────
