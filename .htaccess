@@ -1,9 +1,11 @@
 Options -Indexes
 RewriteEngine On
 
-# Allow direct access to existing files and directories
+# Allow direct access to existing static files only (css, js, images, etc.).
+# Directory names (e.g. /config/, /app/) must be forwarded to index.php so
+# that the PHP router can handle them; without this condition the web server
+# returns 403 Forbidden when a physical directory matches a virtual route.
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
 
 # Route everything through index.php (relative path: always resolves to the
 # directory where this .htaccess lives, regardless of subdirectory install)

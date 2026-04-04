@@ -24,9 +24,13 @@ class Router {
             }
             $pattern = $this->buildPattern($route['pattern']);
             if (preg_match($pattern, $url, $matches)) {
-                // Remove full match, keep named/numbered captures
+                // Remove full match; keep only numeric (positional) captures.
+                // PHP 8+ treats string keys in call_user_func_array as named
+                // arguments, causing "Cannot use positional argument after
+                // named argument" when both numeric and string keys coexist.
                 array_shift($matches);
-                $this->invoke($route['controller'], $route['action'], $matches);
+                $params = array_values(array_filter($matches, 'is_int', ARRAY_FILTER_USE_KEY));
+                $this->invoke($route['controller'], $route['action'], $params);
                 return;
             }
         }
