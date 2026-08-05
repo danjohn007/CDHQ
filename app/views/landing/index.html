@@ -641,76 +641,102 @@
         initMagneticButtons();
         initGlowCards();
 
-        // ---------- Carrusel para testimonios ----------
+        // ---------- Carrusel infinito para testimonios ----------
         const track = document.getElementById('testimonialTrack');
-        const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+        const originalSlides = Array.from(document.querySelectorAll('.carousel-slide'));
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const dotsContainer = document.getElementById('carouselDots');
 
-        let currentIndex = 0;
+        const realCount = originalSlides.length;
+        const CLONE_COUNT = 3; // cubre el máximo de tarjetas visibles a la vez (escritorio)
+        const firstOriginal = originalSlides[0];
+
+        // Clona las últimas tarjetas al inicio y las primeras al final para un loop sin cortes
+        originalSlides.slice(-CLONE_COUNT).forEach(slide => {
+            const clone = slide.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            track.insertBefore(clone, firstOriginal);
+        });
+        originalSlides.slice(0, CLONE_COUNT).forEach(slide => {
+            const clone = slide.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+        });
+
+        const allSlides = Array.from(document.querySelectorAll('.carousel-slide'));
         let slidesPerView = 1;
-        let totalGroups = 1;
-        const totalSlides = slides.length;
+        let absoluteIndex = CLONE_COUNT; // apunta a la tarjeta real 0
+
+        function getRealIndex() {
+            return ((absoluteIndex - CLONE_COUNT) % realCount + realCount) % realCount;
+        }
+
+        function applyWidths() {
+            const widthPercent = 100 / slidesPerView;
+            allSlides.forEach(slide => { slide.style.flex = `0 0 ${widthPercent}%`; });
+        }
+
+        function renderCarousel(withTransition) {
+            const widthPercent = 100 / slidesPerView;
+            track.style.transition = withTransition ? 'transform 0.5s ease-in-out' : 'none';
+            track.style.transform = `translateX(-${absoluteIndex * widthPercent}%)`;
+        }
+
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < realCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === getRealIndex()) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDotsActive() {
+            const realIndex = getRealIndex();
+            document.querySelectorAll('.dot').forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === realIndex);
+            });
+        }
 
         function updateSlidesPerView() {
             const width = window.innerWidth;
             if (width >= 1024) slidesPerView = 3;
             else if (width >= 768) slidesPerView = 2;
             else slidesPerView = 1;
-            totalGroups = Math.ceil(totalSlides / slidesPerView);
-            if (currentIndex >= totalGroups) currentIndex = totalGroups - 1;
-            if (currentIndex < 0) currentIndex = 0;
-            renderCarousel();
-            createDots();
+            applyWidths();
+            renderCarousel(false);
         }
 
-        function renderCarousel() {
-            const groupWidth = 100 / slidesPerView;
-            slides.forEach(slide => {
-                slide.style.flex = `0 0 ${groupWidth}%`;
-            });
-            const offset = currentIndex * 100;
-            track.style.transform = `translateX(-${offset}%)`;
-        }
-
-        function createDots() {
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalGroups; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                if (i === currentIndex) dot.classList.add('active');
-                dot.addEventListener('click', () => {
-                    currentIndex = i;
-                    renderCarousel();
-                    updateDotsActive();
-                });
-                dotsContainer.appendChild(dot);
+        // Al llegar a la zona clonada, reposiciona sin transición para simular el loop infinito
+        track.addEventListener('transitionend', () => {
+            if (absoluteIndex >= CLONE_COUNT + realCount) {
+                absoluteIndex -= realCount;
+                renderCarousel(false);
+            } else if (absoluteIndex < CLONE_COUNT) {
+                absoluteIndex += realCount;
+                renderCarousel(false);
             }
-        }
-
-        function updateDotsActive() {
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, idx) => {
-                if (idx === currentIndex) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
-        }
+        });
 
         function nextSlide() {
-            if (currentIndex < totalGroups - 1) {
-                currentIndex++;
-                renderCarousel();
-                updateDotsActive();
-            }
+            absoluteIndex++;
+            renderCarousel(true);
+            updateDotsActive();
         }
 
         function prevSlide() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                renderCarousel();
-                updateDotsActive();
-            }
+            absoluteIndex--;
+            renderCarousel(true);
+            updateDotsActive();
+        }
+
+        function goToSlide(realIndex) {
+            absoluteIndex = CLONE_COUNT + realIndex;
+            renderCarousel(true);
+            updateDotsActive();
         }
 
         nextBtn.addEventListener('click', nextSlide);
@@ -718,6 +744,8 @@
         window.addEventListener('resize', () => {
             updateSlidesPerView();
         });
+
+        createDots();
         updateSlidesPerView();
     </script>
 </body>
