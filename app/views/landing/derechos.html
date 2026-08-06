@@ -14,6 +14,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="cdhq.css">
+
+    <!-- ─── Bloque crítico: va inline A PROPÓSITO ─────────────────────────────
+         No vive en cdhq.js ni en cdhq.css para que la página siga siendo
+         legible aunque esos archivos falten en el servidor o den error. -->
+    <script>
+        tailwind.config = { theme: { extend: { colors: {
+            brand: { 50:'#f0fbfd',100:'#dbf3fa',200:'#b6e7f2',300:'#82d5e8',400:'#3fb5d3',500:'#0e85a5',600:'#0c7290',700:'#0e5c75',800:'#124b60',900:'#143f51' },
+            leaf:  { 50:'#eefbee',100:'#d7f6d7',200:'#aeeaae',300:'#75d975',400:'#33c433',500:'#00ac00',600:'#009300',700:'#047604',800:'#085d08',900:'#094c09' }
+        } } } };
+    </script>
+    <style>
+        /* AOS deja todo en opacity:0 hasta inicializarse. Si su JS no carga,
+           la página entera se vería en blanco: esta regla la mantiene visible
+           hasta que cdhq.js confirma que AOS arrancó. */
+        html:not(.aos-ready) [data-aos] { opacity: 1 !important; transform: none !important; }
+    </style>
 </head>
 <body class="antialiased">
 

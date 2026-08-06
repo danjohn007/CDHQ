@@ -1,29 +1,11 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   CDHQ – Configuración de tema y comportamiento compartido del sitio público
+   CDHQ – Comportamiento compartido del sitio público
    Debe cargarse DESPUÉS de cdn.tailwindcss.com y ANTES del cierre de </head>.
-   ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ─── Paleta institucional para Tailwind ──────────────────────────────────── */
-if (typeof tailwind !== 'undefined') {
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    /* Aqua institucional (logo CDHQ) */
-                    brand: {
-                        50:  '#f0fbfd', 100: '#dbf3fa', 200: '#b6e7f2', 300: '#82d5e8', 400: '#3fb5d3',
-                        500: '#0e85a5', 600: '#0c7290', 700: '#0e5c75', 800: '#124b60', 900: '#143f51'
-                    },
-                    /* Verde esperanza (acento del logo) */
-                    leaf: {
-                        50:  '#eefbee', 100: '#d7f6d7', 200: '#aeeaae', 300: '#75d975', 400: '#33c433',
-                        500: '#00ac00', 600: '#009300', 700: '#047604', 800: '#085d08', 900: '#094c09'
-                    }
-                }
-            }
-        }
-    };
-}
+   OJO: la paleta de Tailwind NO vive aquí. Está incrustada en el <head> de
+   cada página a propósito, para que los colores institucionales no dependan
+   de que este archivo llegue al servidor.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 (function () {
     'use strict';
@@ -250,7 +232,11 @@ if (typeof tailwind !== 'undefined') {
 
     /* ─── Arranque ────────────────────────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', function () {
+        // Sólo cedemos el control de la visibilidad a AOS si realmente cargó.
+        // Si no, la clase nunca se agrega y el contenido permanece visible
+        // gracias a la regla de respaldo incrustada en el <head>.
         if (typeof AOS !== 'undefined') {
+            document.documentElement.classList.add('aos-ready');
             AOS.init({ duration: 800, once: true, offset: 80, easing: 'ease-out-quad' });
             window.addEventListener('load', function () { AOS.refresh(); });
         }
