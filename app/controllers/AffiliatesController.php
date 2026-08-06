@@ -44,6 +44,8 @@ class AffiliatesController extends Controller {
 
         $data = [
             'affiliate_number' => $number,
+            // Token público del QR de la credencial (CSPRNG, 128 bits)
+            'verification_token' => bin2hex(random_bytes(16)),
             'first_name'  => trim($_POST['first_name']  ?? ''),
             'last_name'   => trim($_POST['last_name']   ?? ''),
             'email'       => trim($_POST['email']       ?? ''),

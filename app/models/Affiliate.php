@@ -4,6 +4,75 @@ require_once CORE_PATH . '/Model.php';
 class Affiliate extends Model {
     protected string $table = 'affiliates';
 
+    /**
+     * Find the affiliate record linked to a system user.
+     * Public wrapper: the base helpers are protected and cannot be reached
+     * from a controller.
+     */
+    public function findByUserId(int $userId): ?array {
+        return $this->queryOne("SELECT * FROM affiliates WHERE user_id = ?", [$userId]);
+    }
+
+    /**
+     * Resolve an affiliate from the public verification token carried by the
+     * QR code on their credential. Returns null when the token is unknown.
+     */
+    public function findByVerificationToken(string $token): ?array {
+        // Only well-formed tokens ever touch the database
+        if (!preg_match('/^[a-f0-9]{32}$/i', $token)) {
+            return null;
+        }
+        return $this->queryOne(
+            "SELECT a.*, u.name AS user_name
+             FROM affiliates a
+             LEFT JOIN users u ON u.id = a.user_id
+             WHERE a.verification_token = ?",
+            [strtolower($token)]
+        );
+    }
+
+    /**
+     * Búsqueda pública de respaldo para credenciales impresas cuyo QR ya no
+     * funciona. Exige folio Y apellido para que el padrón no pueda recorrerse
+     * probando folios consecutivos.
+     */
+    public function findByNumberAndLastName(string $number, string $lastName): ?array {
+        $number   = trim($number);
+        $lastName = trim($lastName);
+        if ($number === '' || $lastName === '') {
+            return null;
+        }
+        // La colación utf8mb4_unicode_ci hace la comparación insensible a
+        // mayúsculas y acentos, así que basta con la igualdad simple.
+        return $this->queryOne(
+            "SELECT a.*, u.name AS user_name
+             FROM affiliates a
+             LEFT JOIN users u ON u.id = a.user_id
+             WHERE a.affiliate_number = ? AND a.last_name = ?",
+            [$number, $lastName]
+        );
+    }
+
+    /**
+     * Return the affiliate's verification token, creating one on the fly when
+     * the record predates the credential-verification migration.
+     */
+    public function ensureVerificationToken(int $affiliateId): string {
+        $row = $this->queryOne(
+            "SELECT verification_token FROM affiliates WHERE id = ?",
+            [$affiliateId]
+        );
+        if (!empty($row['verification_token'])) {
+            return $row['verification_token'];
+        }
+        $token = bin2hex(random_bytes(16));
+        $this->exec(
+            "UPDATE affiliates SET verification_token = ? WHERE id = ?",
+            [$token, $affiliateId]
+        );
+        return $token;
+    }
+
     /** Generate next affiliate number CDHQ-YYYY-NNNN */
     public function generateNumber(): string {
         $year = date('Y');

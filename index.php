@@ -83,6 +83,12 @@ $router->get('reports',                  'ReportsController', 'index');
 // Credentials
 $router->get('credentials/:id',          'CredentialsController', 'show');
 
+// Verificación PÚBLICA de credenciales (destino del código QR impreso).
+// Es la única ruta del sistema que no exige sesión además de /login.
+$router->get('verificar',                'CredentialsController', 'verifyForm');
+$router->get('verificar/:token',         'CredentialsController', 'verify');
+$router->get('verify/:token',            'CredentialsController', 'verify');
+
 // Council
 $router->get('council',                  'CouncilController', 'index');
 $router->get('council/positions',        'CouncilController', 'positions');
@@ -95,10 +101,26 @@ $router->get('config',                   'ConfigController', 'index');
 $router->post('config',                  'ConfigController', 'update');
 
 // ─── Dispatch ────────────────────────────────────────────────────────────────
-// Derive the routable path from REQUEST_URI by stripping the installed base
-// path. This works whether the app is at the document root or in a subdirectory.
-$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
-$basePath   = rtrim(parse_url(BASE_URL, PHP_URL_PATH) ?? '', '/');
-$url        = ltrim(substr($requestUri, strlen($basePath)), '/');
+// The route is resolved from whichever source the server provides, so the app
+// works with clean URLs (mod_rewrite), with the front controller in the path
+// (/index.php/login) and with a plain query string (?r=login).
+if (isset($_GET['r']) && $_GET['r'] !== '') {
+    // 3) Explicit fallback: /index.php?r=login
+    $url = (string) $_GET['r'];
+} elseif (!empty($_SERVER['PATH_INFO'])) {
+    // 2) Front controller in the path: /sistema/index.php/login
+    $url = (string) $_SERVER['PATH_INFO'];
+} else {
+    // 1) Clean URL rewritten by .htaccess: /sistema/login
+    $url = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+    if (APP_BASE_PATH !== '' && strpos($url, APP_BASE_PATH) === 0) {
+        $url = substr($url, strlen(APP_BASE_PATH));
+    }
+    // Drop the front controller when the server exposes it without PATH_INFO
+    $url = ltrim($url, '/');
+    if (strpos($url, 'index.php') === 0) {
+        $url = substr($url, strlen('index.php'));
+    }
+}
 
-$router->dispatch($url);
+$router->dispatch(trim($url, '/'));

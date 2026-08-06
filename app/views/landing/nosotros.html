@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0e85a5">
+    <meta name="description" content="Quiénes somos: el Consejo de Derechos Humanos Querétaro es un organismo civil independiente, sin fines de lucro, con labor estrictamente voluntaria.">
+    <title>Nosotros | CDHQ – Consejo de Derechos Humanos Querétaro</title>
+    <link rel="icon" href="CDHQ%20VERTICAL.png">
+    <link rel="apple-touch-icon" href="CDHQ%20VERTICAL.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="cdhq.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="cdhq.css">
+</head>
+<body class="antialiased">
+
+    <a href="https://wa.me/524423810010?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20Consejo%20de%20Derechos%20Humanos%20Quer%C3%A9taro%20y%20su%20labor%20voluntaria."
+       target="_blank" rel="noopener noreferrer"
+       class="whatsapp-float bg-leaf-500 text-white rounded-full p-4 shadow-lg hover:bg-leaf-600 transition-colors duration-200 flex items-center justify-center"
+       aria-label="WhatsApp">
+        <span class="whatsapp-pulse" aria-hidden="true"></span>
+        <i class="fab fa-whatsapp text-2xl relative z-10"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-[0_2px_18px_-12px_rgba(14,133,165,0.6)]">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <div class="flex items-center justify-between gap-4">
+                <a href="index.html" class="flex items-center shrink-0" aria-label="CDHQ · Inicio">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="Consejo de Derechos Humanos Querétaro" class="h-9 sm:h-11 w-auto">
+                </a>
+                <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-slate-600 font-medium text-sm lg:text-[0.95rem]">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                    <a href="nosotros.html" class="nav-link is-active">Nosotros</a>
+                    <a href="derechos.html" class="nav-link">Derechos</a>
+                    <a href="servicios.html" class="nav-link">Servicios</a>
+                    <a href="contacto.html" class="nav-link">Contacto</a>
+                    <a href="/sistema/" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm">
+                        <i class="fas fa-right-to-bracket text-xs"></i> Sistema
+                    </a>
+                </nav>
+                <button id="navToggle" type="button" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border border-brand-100 text-brand-600" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav id="mobileMenu" class="hidden md:hidden flex-col gap-1 pt-4 mt-4 border-t border-brand-100">
+                <a href="index.html" class="mobile-nav-link">Inicio</a>
+                <a href="nosotros.html" class="mobile-nav-link is-active">Nosotros</a>
+                <a href="derechos.html" class="mobile-nav-link">Derechos</a>
+                <a href="servicios.html" class="mobile-nav-link">Servicios</a>
+                <a href="contacto.html" class="mobile-nav-link">Contacto</a>
+                <a href="/sistema/" class="mobile-nav-link text-brand-700 font-semibold"><i class="fas fa-right-to-bracket mr-1"></i> Acceso al sistema</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Encabezado de página -->
+        <section class="page-hero py-16 md:py-24">
+            <div class="hero-blob absolute -top-28 -right-20 w-80 h-80 bg-brand-200/45 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="hero-blob hero-blob-delay absolute -bottom-24 -left-20 w-80 h-80 bg-leaf-200/40 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6 max-w-4xl text-center" data-aos="fade-up">
+                <nav class="text-sm text-slate-500 mb-5" aria-label="Ruta de navegación">
+                    <a href="index.html" class="hover:text-brand-600 transition-colors">Inicio</a>
+                    <span class="mx-2 text-slate-300">/</span>
+                    <span class="text-brand-600 font-medium">Nosotros</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
+                    Quiénes <span class="bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">somos</span>
+                </h1>
+                <p class="text-slate-600 text-lg mt-5 leading-relaxed">
+                    Una institución civil independiente que trabaja, de manera estrictamente voluntaria,
+                    para que los derechos humanos sean conocidos, respetados y exigibles en Querétaro.
+                </p>
+            </div>
+        </section>
+
+        <!-- Historia / presentación -->
+        <section class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+                    <div data-aos="fade-right">
+                        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-leaf-600 mb-3">
+                            <span class="w-8 h-px bg-leaf-500"></span> Nuestra razón de ser
+                        </span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-800 leading-tight">
+                            La dignidad no se negocia
+                        </h2>
+                        <p class="text-slate-600 mt-5 leading-relaxed">
+                            El <strong class="text-slate-800">Consejo de Derechos Humanos Querétaro (CDHQ)</strong> nace de la
+                            convicción de que el respeto a los derechos humanos es un deber de todas las personas, no sólo
+                            de las autoridades. Constituido mediante instrumento público y registrado ante las instancias
+                            competentes, somos un organismo autónomo y sin fines de lucro.
+                        </p>
+                        <p class="text-slate-600 mt-4 leading-relaxed">
+                            Acompañamos a quien lo necesita, explicamos en lenguaje claro qué derechos le asisten y ante
+                            qué instancia puede hacerlos valer. Formamos parte de la
+                            <strong class="text-slate-800">Red Nacional de Defensores de Derechos Humanos</strong>, lo que
+                            nos permite colaborar con otros organismos civiles del país.
+                        </p>
+                        <p class="text-slate-600 mt-4 leading-relaxed">
+                            Todo nuestro trabajo es voluntario y gratuito para las personas que se acercan a nosotros.
+                        </p>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-5" data-aos="fade-left" data-aos-delay="100">
+                        <div class="bg-white rounded-2xl p-6 border border-brand-100 shadow-sm text-center">
+                            <p class="text-3xl font-extrabold bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">2022</p>
+                            <p class="text-slate-500 text-sm mt-1">Año de constitución</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-leaf-100 shadow-sm text-center sm:mt-8">
+                            <p class="text-3xl font-extrabold bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">100%</p>
+                            <p class="text-slate-500 text-sm mt-1">Labor voluntaria</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-leaf-100 shadow-sm text-center">
+                            <p class="text-3xl font-extrabold bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">$0</p>
+                            <p class="text-slate-500 text-sm mt-1">Costo de la orientación</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 border border-brand-100 shadow-sm text-center sm:mt-8">
+                            <p class="text-3xl font-extrabold bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">20+</p>
+                            <p class="text-slate-500 text-sm mt-1">Derechos que difundimos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Misión, visión, valores -->
+        <section class="relative py-16 md:py-24 overflow-hidden" style="background:linear-gradient(180deg,#ffffff 0%,#f2fbfd 55%,#f0fbf4 100%);">
+            <div class="absolute inset-0 dot-grid opacity-60 pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Misión, visión y valores</h2>
+                    <div class="w-20 h-1.5 bg-gradient-to-r from-brand-500 to-leaf-500 mx-auto mt-5 rounded-full"></div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div class="glow-card bg-white rounded-2xl p-7 border border-slate-200 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center mb-5"><i class="fas fa-bullseye text-xl"></i></div>
+                        <h3 class="text-xl font-bold text-slate-800">Misión</h3>
+                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+                            Promover, difundir y defender los derechos humanos desde la sociedad civil, acompañando de
+                            forma gratuita y voluntaria a las personas que ven vulnerada su dignidad.
+                        </p>
+                    </div>
+                    <div class="glow-card bg-white rounded-2xl p-7 border border-slate-200 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                        <div class="w-12 h-12 rounded-xl bg-leaf-50 border border-leaf-100 text-leaf-600 flex items-center justify-center mb-5"><i class="fas fa-eye text-xl"></i></div>
+                        <h3 class="text-xl font-bold text-slate-800">Visión</h3>
+                        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+                            Una sociedad queretana donde cada persona conozca sus derechos, sepa cómo exigirlos y
+                            encuentre acompañamiento cuando lo necesite, en una cultura sólida de paz y justicia.
+                        </p>
+                    </div>
+                    <div class="glow-card bg-white rounded-2xl p-7 border border-slate-200 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center mb-5"><i class="fas fa-heart text-xl"></i></div>
+                        <h3 class="text-xl font-bold text-slate-800">Valores</h3>
+                        <ul class="text-slate-600 text-sm mt-3 space-y-2">
+                            <li class="flex gap-2"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Dignidad humana</li>
+                            <li class="flex gap-2"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Independencia</li>
+                            <li class="flex gap-2"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Honestidad y transparencia</li>
+                            <li class="flex gap-2"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Solidaridad</li>
+                            <li class="flex gap-2"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> No discriminación</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Qué somos / qué no somos -->
+        <section class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Claridad ante todo</h2>
+                    <p class="text-slate-500 mt-3">Para evitar confusiones, esto es exactamente lo que somos y lo que no.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <div class="rounded-2xl p-7 border border-leaf-200 bg-leaf-50/50" data-aos="fade-right">
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="w-10 h-10 rounded-full bg-leaf-500 text-white flex items-center justify-center"><i class="fas fa-check"></i></span>
+                            <h3 class="text-xl font-bold text-slate-800">Sí somos</h3>
+                        </div>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Una asociación civil constituida ante notario e inscrita ante las autoridades competentes.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Un organismo <strong>sin fines de lucro</strong> y de participación voluntaria.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Un espacio de orientación gratuita sobre derechos humanos.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Parte de la Red Nacional de Defensores de Derechos Humanos.</span></li>
+                        </ul>
+                    </div>
+                    <div class="rounded-2xl p-7 border border-slate-200 bg-slate-50/70" data-aos="fade-left">
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="w-10 h-10 rounded-full bg-slate-400 text-white flex items-center justify-center"><i class="fas fa-xmark"></i></span>
+                            <h3 class="text-xl font-bold text-slate-800">No somos</h3>
+                        </div>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Una dependencia de gobierno ni un organismo público autónomo.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Servidores públicos: quienes portan nuestras credenciales <strong>no lo son</strong>.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Un despacho jurídico ni sustituimos la representación legal de un abogado.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Una instancia con facultades para sancionar o resolver litigios.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registro y base jurídica -->
+        <section class="relative py-16 md:py-24 blueprint-grid overflow-hidden" style="background:linear-gradient(180deg,#f2fbfd 0%,#eefaf3 100%);">
+            <div class="container relative mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white shadow-sm border border-brand-100 text-brand-500 mb-4">
+                        <i class="fas fa-scroll text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-semibold text-slate-800">Registro y base jurídica</h2>
+                    <p class="text-slate-500 mt-2">Información respaldada por instrumento público y autoridades competentes.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mt-12 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 border-l-4 border-l-brand-500">
+                        <i class="fas fa-building text-brand-500 text-2xl mb-3 block"></i>
+                        <h3 class="text-xl font-bold text-slate-800">Consejo de Derechos Humanos Querétaro</h3>
+                        <ul class="mt-4 space-y-3 text-slate-700 text-sm sm:text-base">
+                            <li class="flex justify-between gap-3 border-b border-slate-100 pb-3"><span class="font-medium text-slate-500">Instrumento Público:</span><span class="font-mono font-semibold text-slate-800">30,397</span></li>
+                            <li class="flex justify-between gap-3 border-b border-slate-100 pb-3"><span class="font-medium text-slate-500">Registro Federal Causantes:</span><span class="font-mono font-semibold text-slate-800">CDH220818EG2</span></li>
+                            <li class="flex justify-between gap-3 border-b border-slate-100 pb-3"><span class="font-medium text-slate-500">Expediente:</span><span class="font-mono font-semibold text-slate-800">919-2022</span></li>
+                            <li class="flex flex-wrap justify-between gap-2"><span class="font-medium text-slate-500">Clave Secretaría de Economía:</span><span class="font-mono font-semibold text-slate-800 text-xs sm:text-sm break-all">A202205311617095887</span></li>
+                        </ul>
+                    </div>
+                    <div class="rounded-2xl p-6 sm:p-7 text-white shadow-lg border border-brand-600/40" style="background:linear-gradient(150deg,#0e85a5 0%,#0e5c75 100%);">
+                        <img src="CDHQ%20HORIZONTAL%20B.png" alt="CDHQ" class="h-9 w-auto mb-4">
+                        <h3 class="text-xl font-bold text-white">Red Nacional de Defensores</h3>
+                        <p class="text-white/85 text-sm mt-2">El CDHQ forma parte de la <strong>Red Nacional de Defensores de Derechos Humanos</strong>, promoviendo la colaboración entre organismos civiles y la protección de derechos fundamentales.</p>
+                        <div class="mt-5 flex items-start gap-2 text-xs text-white bg-white/15 p-3 rounded-lg border border-white/15">
+                            <i class="fas fa-globe-americas mt-0.5"></i>
+                            <span>www.cdhq.digital — Transparencia y acompañamiento voluntario.</span>
+                        </div>
+                        <div class="mt-4 flex items-start gap-2 text-xs text-white/85 italic bg-white/10 p-2.5 rounded-lg">
+                            <i class="fas fa-info-circle mt-0.5"></i>
+                            <span>El portador de las credenciales de este organismo no es servidor público; su labor es estrictamente apoyo voluntario.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="relative py-20 text-white overflow-hidden" style="background:linear-gradient(135deg,#0e85a5 0%,#0b7d8e 55%,#0f8f52 100%);">
+            <div class="absolute -top-16 -right-16 w-72 h-72 bg-leaf-300/25 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6 text-center max-w-3xl" data-aos="fade-up">
+                <h2 class="text-3xl font-bold">¿Quieres sumarte como voluntario?</h2>
+                <p class="text-white/85 mt-3 mb-8">Siempre hacen falta manos: abogados, docentes, comunicadores, psicólogos y personas con ganas de servir.</p>
+                <span class="magnetic-wrap">
+                    <a href="contacto.html" class="magnetic-btn magnetic-solid inline-flex items-center gap-2 bg-white text-brand-700 hover:text-brand-800 font-semibold px-7 py-3.5 rounded-full shadow-lg transition-colors" style="--glow-color:#00ac00">
+                        <span class="glow-layer" aria-hidden="true"></span>
+                        <span class="btn-label"><i class="fas fa-hand-holding-heart text-leaf-500"></i> Quiero colaborar</span>
+                    </a>
+                </span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative pt-14 pb-10" style="background:linear-gradient(180deg,#f2fbfd 0%,#e9f6f1 100%);">
+        <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(90deg,#0e85a5,#00ac00);"></div>
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid md:grid-cols-4 gap-10 md:gap-8">
+                <div class="md:col-span-2">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="CDHQ" class="h-11 w-auto mb-4">
+                    <p class="text-slate-600 text-sm leading-relaxed max-w-sm">
+                        Consejo de Derechos Humanos Querétaro. Organismo civil independiente, sin fines de lucro,
+                        dedicado a la promoción, defensa y acompañamiento de los derechos humanos.
+                    </p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-leaf-500 hover:text-white hover:border-leaf-500 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Navegación</h3>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="index.html" class="text-slate-600 hover:text-brand-600 transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="text-slate-600 hover:text-brand-600 transition-colors">Nosotros</a></li>
+                        <li><a href="derechos.html" class="text-slate-600 hover:text-brand-600 transition-colors">Derechos humanos</a></li>
+                        <li><a href="servicios.html" class="text-slate-600 hover:text-brand-600 transition-colors">Servicios</a></li>
+                        <li><a href="contacto.html" class="text-slate-600 hover:text-brand-600 transition-colors">Contacto</a></li>
+                        <li><a href="/sistema/verificar" class="text-slate-600 hover:text-brand-600 transition-colors">Verificar credencial</a></li>
+                        <li><a href="aviso-de-privacidad.html" class="text-slate-600 hover:text-brand-600 transition-colors">Aviso de privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Contacto</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-2.5"><i class="fas fa-map-marker-alt text-brand-500 mt-1"></i><span>Paseo Constitución No. 100, Villas del Parque, Querétaro, Qro.</span></li>
+                        <li class="flex gap-2.5"><i class="fas fa-phone-alt text-brand-500 mt-1"></i><a href="tel:+524422956843" class="hover:text-brand-600 transition-colors">+52 442 295 6843</a></li>
+                        <li class="flex gap-2.5"><i class="fab fa-whatsapp text-leaf-500 mt-1"></i><a href="https://wa.me/524423810010" target="_blank" rel="noopener noreferrer" class="hover:text-leaf-600 transition-colors">+52 442 381 0010</a></li>
+                        <li class="flex gap-2.5"><i class="fas fa-envelope text-brand-500 mt-1"></i><a href="mailto:hola@cdhq.digital" class="hover:text-brand-600 transition-colors">hola@cdhq.digital</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-8 border-brand-100">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                <p class="text-slate-500 text-sm">© 2026 Consejo de Derechos Humanos Querétaro · Todos los derechos reservados</p>
+                <p class="text-slate-500 text-sm">Organismo civil independiente · Apoyo voluntario</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>

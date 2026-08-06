@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0e85a5">
+    <meta name="description" content="Contacta al Consejo de Derechos Humanos Querétaro: dirección, teléfono, WhatsApp y correo para solicitar orientación o sumarte como voluntario.">
+    <title>Contacto | CDHQ – Consejo de Derechos Humanos Querétaro</title>
+    <link rel="icon" href="CDHQ%20VERTICAL.png">
+    <link rel="apple-touch-icon" href="CDHQ%20VERTICAL.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="cdhq.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="cdhq.css">
+</head>
+<body class="antialiased">
+
+    <a href="https://wa.me/524423810010?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20CDHQ."
+       target="_blank" rel="noopener noreferrer"
+       class="whatsapp-float bg-leaf-500 text-white rounded-full p-4 shadow-lg hover:bg-leaf-600 transition-colors duration-200 flex items-center justify-center"
+       aria-label="WhatsApp">
+        <span class="whatsapp-pulse" aria-hidden="true"></span>
+        <i class="fab fa-whatsapp text-2xl relative z-10"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-[0_2px_18px_-12px_rgba(14,133,165,0.6)]">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <div class="flex items-center justify-between gap-4">
+                <a href="index.html" class="flex items-center shrink-0" aria-label="CDHQ · Inicio">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="Consejo de Derechos Humanos Querétaro" class="h-9 sm:h-11 w-auto">
+                </a>
+                <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-slate-600 font-medium text-sm lg:text-[0.95rem]">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                    <a href="nosotros.html" class="nav-link">Nosotros</a>
+                    <a href="derechos.html" class="nav-link">Derechos</a>
+                    <a href="servicios.html" class="nav-link">Servicios</a>
+                    <a href="contacto.html" class="nav-link is-active">Contacto</a>
+                    <a href="/sistema/" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm">
+                        <i class="fas fa-right-to-bracket text-xs"></i> Sistema
+                    </a>
+                </nav>
+                <button id="navToggle" type="button" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border border-brand-100 text-brand-600" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav id="mobileMenu" class="hidden md:hidden flex-col gap-1 pt-4 mt-4 border-t border-brand-100">
+                <a href="index.html" class="mobile-nav-link">Inicio</a>
+                <a href="nosotros.html" class="mobile-nav-link">Nosotros</a>
+                <a href="derechos.html" class="mobile-nav-link">Derechos</a>
+                <a href="servicios.html" class="mobile-nav-link">Servicios</a>
+                <a href="contacto.html" class="mobile-nav-link is-active">Contacto</a>
+                <a href="/sistema/" class="mobile-nav-link text-brand-700 font-semibold"><i class="fas fa-right-to-bracket mr-1"></i> Acceso al sistema</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Encabezado de página -->
+        <section class="page-hero py-16 md:py-20">
+            <div class="hero-blob absolute -top-28 -right-20 w-80 h-80 bg-brand-200/45 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="hero-blob hero-blob-delay absolute -bottom-24 -left-20 w-80 h-80 bg-leaf-200/40 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6 max-w-4xl text-center" data-aos="fade-up">
+                <nav class="text-sm text-slate-500 mb-5" aria-label="Ruta de navegación">
+                    <a href="index.html" class="hover:text-brand-600 transition-colors">Inicio</a>
+                    <span class="mx-2 text-slate-300">/</span>
+                    <span class="text-brand-600 font-medium">Contacto</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
+                    Estamos para <span class="bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">escucharte</span>
+                </h1>
+                <p class="text-slate-600 text-lg mt-5 leading-relaxed">
+                    Escríbenos para solicitar orientación, pedir un taller o sumarte como persona voluntaria.
+                </p>
+            </div>
+        </section>
+
+        <!-- Datos + formulario -->
+        <section class="pb-16 md:pb-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="grid lg:grid-cols-5 gap-8 lg:gap-10 max-w-6xl mx-auto">
+
+                    <!-- Datos de contacto -->
+                    <div class="lg:col-span-2 space-y-4" data-aos="fade-right">
+                        <a href="https://wa.me/524423810010" target="_blank" rel="noopener noreferrer"
+                           class="glow-card block bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <span class="w-12 h-12 shrink-0 rounded-xl bg-leaf-50 border border-leaf-100 text-leaf-600 flex items-center justify-center"><i class="fab fa-whatsapp text-xl"></i></span>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">WhatsApp</h3>
+                                    <p class="text-brand-600 text-sm mt-1 font-medium">+52 442 381 0010</p>
+                                    <p class="text-slate-500 text-xs mt-1">La vía más rápida para recibir respuesta.</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="tel:+524422956843" class="glow-card block bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <span class="w-12 h-12 shrink-0 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center"><i class="fas fa-phone-alt text-lg"></i></span>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">Teléfono</h3>
+                                    <p class="text-brand-600 text-sm mt-1 font-medium">+52 442 295 6843</p>
+                                    <p class="text-slate-500 text-xs mt-1">Lunes a viernes, horario de oficina.</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="mailto:hola@cdhq.digital" class="glow-card block bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <span class="w-12 h-12 shrink-0 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center"><i class="fas fa-envelope text-lg"></i></span>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">Correo electrónico</h3>
+                                    <p class="text-brand-600 text-sm mt-1 font-medium break-all">hola@cdhq.digital</p>
+                                    <p class="text-slate-500 text-xs mt-1">Para casos que requieren enviar documentos.</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="glow-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <span class="w-12 h-12 shrink-0 rounded-xl bg-leaf-50 border border-leaf-100 text-leaf-600 flex items-center justify-center"><i class="fas fa-map-marker-alt text-lg"></i></span>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">Dirección</h3>
+                                    <p class="text-slate-600 text-sm mt-1">Paseo Constitución No. 100, Villas del Parque, Querétaro, Qro., México.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl p-6 text-white shadow-lg" style="background:linear-gradient(150deg,#0e85a5 0%,#0f8f52 100%);">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-triangle-exclamation mt-1"></i>
+                                <p class="text-sm text-white/95 leading-relaxed">
+                                    Si tu vida o integridad están en riesgo inmediato, llama al
+                                    <strong class="font-bold">911</strong>. Nuestro acompañamiento es complementario y no
+                                    sustituye a las autoridades competentes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario -->
+                    <div class="lg:col-span-3" data-aos="fade-left" data-aos-delay="100">
+                        <div class="bg-white rounded-2xl border border-brand-100 shadow-[0_30px_70px_-40px_rgba(14,133,165,0.6)] p-7 sm:p-9">
+                            <h2 class="text-2xl font-bold text-slate-800">Cuéntanos tu caso</h2>
+                            <p class="text-slate-500 text-sm mt-2">
+                                Completa los datos y elige cómo quieres enviarnos tu mensaje. Toda consulta es gratuita
+                                y confidencial.
+                            </p>
+
+                            <form id="contactForm" class="mt-7 space-y-5" novalidate>
+                                <div class="grid sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label for="nombre" class="block text-sm font-medium text-slate-700 mb-1.5">Nombre completo <span class="text-red-500">*</span></label>
+                                        <input type="text" id="nombre" name="nombre" required
+                                               class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition"
+                                               placeholder="Tu nombre">
+                                    </div>
+                                    <div>
+                                        <label for="telefono" class="block text-sm font-medium text-slate-700 mb-1.5">Teléfono</label>
+                                        <input type="tel" id="telefono" name="telefono"
+                                               class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition"
+                                               placeholder="442 000 0000">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="correo" class="block text-sm font-medium text-slate-700 mb-1.5">Correo electrónico</label>
+                                    <input type="email" id="correo" name="correo"
+                                           class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition"
+                                           placeholder="tucorreo@ejemplo.com">
+                                </div>
+                                <div>
+                                    <label for="motivo" class="block text-sm font-medium text-slate-700 mb-1.5">Motivo de contacto <span class="text-red-500">*</span></label>
+                                    <select id="motivo" name="motivo" required
+                                            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition bg-white">
+                                        <option value="">Selecciona una opción</option>
+                                        <option>Solicitar orientación sobre un caso</option>
+                                        <option>Solicitar un taller para mi institución</option>
+                                        <option>Quiero ser voluntario</option>
+                                        <option>Información sobre afiliación</option>
+                                        <option>Otro</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="mensaje" class="block text-sm font-medium text-slate-700 mb-1.5">Mensaje <span class="text-red-500">*</span></label>
+                                    <textarea id="mensaje" name="mensaje" rows="5" required
+                                              class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition resize-y"
+                                              placeholder="Describe brevemente qué ocurrió, cuándo y quiénes intervinieron."></textarea>
+                                </div>
+                                <label class="flex items-start gap-3 text-sm text-slate-600">
+                                    <input type="checkbox" id="privacidad" required class="mt-1 w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-400">
+                                    <span>He leído y acepto el <a href="aviso-de-privacidad.html" class="text-brand-600 font-medium hover:text-leaf-600 transition-colors">Aviso de Privacidad</a>. <span class="text-red-500">*</span></span>
+                                </label>
+
+                                <div id="formError" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3"></div>
+
+                                <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                                    <button type="button" id="sendWhatsapp"
+                                            class="flex-1 inline-flex items-center justify-center gap-2 bg-leaf-500 hover:bg-leaf-600 text-white font-semibold py-3 px-5 rounded-full transition-colors shadow-lg shadow-leaf-500/25">
+                                        <i class="fab fa-whatsapp text-lg"></i> Enviar por WhatsApp
+                                    </button>
+                                    <button type="button" id="sendEmail"
+                                            class="flex-1 inline-flex items-center justify-center gap-2 bg-white border border-brand-200 hover:border-brand-400 text-brand-700 font-semibold py-3 px-5 rounded-full transition-colors">
+                                        <i class="fas fa-envelope"></i> Enviar por correo
+                                    </button>
+                                </div>
+                                <p class="text-xs text-slate-400 text-center pt-1">
+                                    Al enviar se abrirá WhatsApp o tu gestor de correo con el mensaje ya redactado.
+                                    Este formulario no almacena tus datos en este sitio.
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapa -->
+        <section class="relative" style="background:linear-gradient(180deg,#ffffff 0%,#f2fbfd 100%);">
+            <div class="container mx-auto px-4 sm:px-6 pb-16 md:pb-20">
+                <div class="max-w-6xl mx-auto" data-aos="fade-up">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-5 text-center">Dónde estamos</h2>
+                    <div class="rounded-2xl overflow-hidden border border-brand-100 shadow-lg">
+                        <iframe
+                            title="Ubicación del Consejo de Derechos Humanos Querétaro"
+                            src="https://www.google.com/maps?q=Paseo%20Constituci%C3%B3n%20100%2C%20Villas%20del%20Parque%2C%20Quer%C3%A9taro%2C%20Qro&output=embed"
+                            width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative pt-14 pb-10" style="background:linear-gradient(180deg,#f2fbfd 0%,#e9f6f1 100%);">
+        <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(90deg,#0e85a5,#00ac00);"></div>
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid md:grid-cols-4 gap-10 md:gap-8">
+                <div class="md:col-span-2">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="CDHQ" class="h-11 w-auto mb-4">
+                    <p class="text-slate-600 text-sm leading-relaxed max-w-sm">
+                        Consejo de Derechos Humanos Querétaro. Organismo civil independiente, sin fines de lucro,
+                        dedicado a la promoción, defensa y acompañamiento de los derechos humanos.
+                    </p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-leaf-500 hover:text-white hover:border-leaf-500 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Navegación</h3>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="index.html" class="text-slate-600 hover:text-brand-600 transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="text-slate-600 hover:text-brand-600 transition-colors">Nosotros</a></li>
+                        <li><a href="derechos.html" class="text-slate-600 hover:text-brand-600 transition-colors">Derechos humanos</a></li>
+                        <li><a href="servicios.html" class="text-slate-600 hover:text-brand-600 transition-colors">Servicios</a></li>
+                        <li><a href="contacto.html" class="text-slate-600 hover:text-brand-600 transition-colors">Contacto</a></li>
+                        <li><a href="/sistema/verificar" class="text-slate-600 hover:text-brand-600 transition-colors">Verificar credencial</a></li>
+                        <li><a href="aviso-de-privacidad.html" class="text-slate-600 hover:text-brand-600 transition-colors">Aviso de privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Contacto</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-2.5"><i class="fas fa-map-marker-alt text-brand-500 mt-1"></i><span>Paseo Constitución No. 100, Villas del Parque, Querétaro, Qro.</span></li>
+                        <li class="flex gap-2.5"><i class="fas fa-phone-alt text-brand-500 mt-1"></i><a href="tel:+524422956843" class="hover:text-brand-600 transition-colors">+52 442 295 6843</a></li>
+                        <li class="flex gap-2.5"><i class="fab fa-whatsapp text-leaf-500 mt-1"></i><a href="https://wa.me/524423810010" target="_blank" rel="noopener noreferrer" class="hover:text-leaf-600 transition-colors">+52 442 381 0010</a></li>
+                        <li class="flex gap-2.5"><i class="fas fa-envelope text-brand-500 mt-1"></i><a href="mailto:hola@cdhq.digital" class="hover:text-brand-600 transition-colors">hola@cdhq.digital</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-8 border-brand-100">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                <p class="text-slate-500 text-sm">© 2026 Consejo de Derechos Humanos Querétaro · Todos los derechos reservados</p>
+                <p class="text-slate-500 text-sm">Organismo civil independiente · Apoyo voluntario</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // El sitio público es estático: el formulario arma el mensaje y lo entrega
+        // por WhatsApp o por correo, sin almacenar datos en este servidor.
+        (function () {
+            const WHATSAPP = '524423810010';
+            const EMAIL    = 'hola@cdhq.digital';
+
+            const form  = document.getElementById('contactForm');
+            const error = document.getElementById('formError');
+            if (!form) return;
+
+            function showError(msg) {
+                error.textContent = msg;
+                error.classList.remove('hidden');
+                error.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            function collect() {
+                const nombre  = document.getElementById('nombre').value.trim();
+                const correo  = document.getElementById('correo').value.trim();
+                const telefono= document.getElementById('telefono').value.trim();
+                const motivo  = document.getElementById('motivo').value;
+                const mensaje = document.getElementById('mensaje').value.trim();
+                const acepta  = document.getElementById('privacidad').checked;
+
+                if (!nombre)  { showError('Por favor escribe tu nombre completo.'); return null; }
+                if (!motivo)  { showError('Selecciona el motivo de contacto.'); return null; }
+                if (!mensaje) { showError('Cuéntanos brevemente tu situación en el mensaje.'); return null; }
+                if (!acepta)  { showError('Debes aceptar el Aviso de Privacidad para continuar.'); return null; }
+
+                error.classList.add('hidden');
+                return { nombre, correo, telefono, motivo, mensaje };
+            }
+
+            function buildBody(d) {
+                const lineas = [
+                    'Nombre: ' + d.nombre,
+                    d.telefono ? 'Teléfono: ' + d.telefono : null,
+                    d.correo ? 'Correo: ' + d.correo : null,
+                    'Motivo: ' + d.motivo,
+                    '',
+                    d.mensaje
+                ].filter(Boolean);
+                return lineas.join('\n');
+            }
+
+            document.getElementById('sendWhatsapp').addEventListener('click', function () {
+                const d = collect();
+                if (!d) return;
+                const texto = 'Hola, escribo desde el sitio del CDHQ.\n\n' + buildBody(d);
+                window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+            });
+
+            document.getElementById('sendEmail').addEventListener('click', function () {
+                const d = collect();
+                if (!d) return;
+                const asunto = 'Contacto desde el sitio web – ' + d.motivo;
+                window.location.href = 'mailto:' + EMAIL +
+                    '?subject=' + encodeURIComponent(asunto) +
+                    '&body=' + encodeURIComponent(buildBody(d));
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -6,15 +6,49 @@ define('DB_USER', 'cdhq_sistema');
 define('DB_PASS', '!(6IS_X3k,EO');
 define('DB_CHARSET', 'utf8mb4');
 
-// ─── Auto-detect BASE_URL ─────────────────────────────────────────────────────
-if (!defined('BASE_URL')) {
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-    $host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
-    // Derive the base path from the script location so the app works in any subdirectory
-    $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
-    $scriptDir = rtrim($scriptDir, '/');
-    define('BASE_URL', $protocol . '://' . $host . $scriptDir);
+// ─── URL style ────────────────────────────────────────────────────────────────
+// true  → URLs limpias (/sistema/login). Requiere .htaccess + mod_rewrite.
+// false → URLs por front controller (/sistema/index.php/login). Funciona SIEMPRE,
+//         aunque el hosting ignore el .htaccess o no tenga mod_rewrite.
+//
+// Si al entrar a /sistema/login el servidor responde 404, cambia esto a false:
+// todos los enlaces del sistema se regeneran solos, no hay que tocar nada más.
+if (!defined('PRETTY_URLS')) {
+    define('PRETTY_URLS', true);
 }
+
+// ─── Auto-detect install path / BASE_URL ──────────────────────────────────────
+// Derive the install directory from the script location so the app works in any
+// subdirectory. Some CGI/FPM setups append PATH_INFO to SCRIPT_NAME (e.g.
+// "/sistema/index.php/login"), so cut the string at "/index.php" instead of
+// relying on dirname() alone.
+$cdhqScriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+$cdhqCut        = strpos($cdhqScriptName, '/index.php');
+$cdhqBasePath   = ($cdhqCut !== false) ? substr($cdhqScriptName, 0, $cdhqCut) : dirname($cdhqScriptName);
+$cdhqBasePath   = rtrim($cdhqBasePath, '/');
+if ($cdhqBasePath === '.' || $cdhqBasePath === '/') {
+    $cdhqBasePath = '';
+}
+$cdhqProtocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$cdhqHost     = $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+// Install path without scheme/host: "" at the domain root, "/sistema" in a subdir.
+define('APP_BASE_PATH', $cdhqBasePath);
+// Canonical root of the install, always without the front controller.
+define('APP_ROOT_URL', $cdhqProtocol . '://' . $cdhqHost . $cdhqBasePath);
+
+if (!defined('BASE_URL')) {
+    // Every view builds links as BASE_URL . '/ruta', so appending the front
+    // controller here is all that's needed to switch URL styles globally.
+    define('BASE_URL', PRETTY_URLS ? APP_ROOT_URL : APP_ROOT_URL . '/index.php');
+}
+// Raíz del dominio: ahí viven la landing pública y los logotipos institucionales
+// (CDHQ HORIZONTAL.png / CDHQ VERTICAL.png), que el sistema reutiliza.
+if (!defined('SITE_URL')) {
+    define('SITE_URL', $cdhqProtocol . '://' . $cdhqHost);
+}
+
+unset($cdhqScriptName, $cdhqCut, $cdhqBasePath, $cdhqProtocol, $cdhqHost);
 
 // ─── Application Constants ────────────────────────────────────────────────────
 define('APP_NAME', 'Sistema CDHQ');

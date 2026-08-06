@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 CREATE TABLE IF NOT EXISTS `affiliates` (
     `id`               INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     `affiliate_number` VARCHAR(20)  NOT NULL UNIQUE,
+    `verification_token` CHAR(32)   NULL DEFAULT NULL UNIQUE COMMENT 'Token público del QR de la credencial',
     `user_id`          INT UNSIGNED NULL,
     `first_name`       VARCHAR(80)  NOT NULL,
     `last_name`        VARCHAR(80)  NOT NULL,
