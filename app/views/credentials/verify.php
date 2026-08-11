@@ -5,34 +5,30 @@
  * Muestra únicamente los datos mínimos para acreditar la credencial:
  * folio, nombre, estado y vigencia. Nunca correo, teléfono ni domicilio.
  */
-$found    = !empty($affiliate);
+$found    = !empty($credential);
 $dbError  = !empty($dbError);
-$fullName = $found ? trim($affiliate['first_name'] . ' ' . $affiliate['last_name']) : '';
+$fullName = $found ? trim($credential['first_name'] . ' ' . $credential['last_name']) : '';
 
 if ($dbError) {
     $statusLabel = 'No se pudo verificar en este momento';
     $statusText  = 'El servicio de verificación no está disponible temporalmente. Vuelve a intentarlo en unos minutos o contacta al Consejo.';
     $statusIcon  = '!';
     $statusBg    = 'bg-slate-400';
-    $chipClass   = 'bg-slate-50 text-slate-700 border-slate-200';
 } elseif (!$found) {
     $statusLabel = 'Credencial no encontrada';
     $statusText  = 'El código escaneado no corresponde a ninguna credencial emitida por el Consejo.';
     $statusIcon  = '&#10005;';
     $statusBg    = 'bg-red-500';
-    $chipClass   = 'bg-red-50 text-red-700 border-red-200';
 } elseif ($isValid) {
     $statusLabel = 'Credencial vigente';
     $statusText  = 'Esta credencial fue emitida por el Consejo de Derechos Humanos Querétaro y se encuentra vigente.';
     $statusIcon  = '&#10003;';
     $statusBg    = 'bg-leaf-500';
-    $chipClass   = 'bg-leaf-50 text-leaf-700 border-leaf-200';
 } else {
-    $statusLabel = 'Credencial sin vigencia activa';
-    $statusText  = 'La persona está registrada ante el Consejo, pero su credencial no cuenta con una vigencia activa en este momento.';
+    $statusLabel = 'Credencial sin vigencia';
+    $statusText  = 'La persona está registrada ante el Consejo, pero esta credencial no se encuentra vigente en este momento.';
     $statusIcon  = '!';
     $statusBg    = 'bg-amber-500';
-    $chipClass   = 'bg-amber-50 text-amber-700 border-amber-200';
 }
 ?>
 <!DOCTYPE html>
@@ -53,14 +49,10 @@ if ($dbError) {
         } } } }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        body { overflow-x: hidden; }
-    </style>
+    <style>* { font-family: 'Inter', sans-serif; } body { overflow-x: hidden; }</style>
 </head>
 <body class="min-h-screen flex flex-col" style="background:linear-gradient(165deg,#ffffff 0%,#f2fbfd 45%,#edfaf1 100%);">
 
-<!-- Encabezado -->
 <header class="bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-[0_2px_18px_-12px_rgba(14,133,165,0.6)]">
     <div class="container mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
         <a href="<?= SITE_URL ?>/" aria-label="CDHQ · Inicio">
@@ -72,57 +64,51 @@ if ($dbError) {
 
 <main class="flex-1 flex items-center justify-center px-4 py-10 sm:py-14">
     <div class="w-full max-w-lg">
-
-        <!-- Resultado -->
         <div class="bg-white rounded-3xl border border-brand-100 shadow-[0_30px_70px_-40px_rgba(14,133,165,0.65)] overflow-hidden">
 
             <div class="px-7 sm:px-9 pt-9 pb-7 text-center border-b border-slate-100">
                 <div class="w-20 h-20 mx-auto rounded-full <?= $statusBg ?> text-white flex items-center justify-center text-4xl font-bold shadow-lg">
                     <?= $statusIcon ?>
                 </div>
-                <h1 class="text-2xl font-bold text-slate-800 mt-5"><?= htmlspecialchars($statusLabel) ?></h1>
-                <p class="text-slate-500 text-sm mt-3 leading-relaxed"><?= htmlspecialchars($statusText) ?></p>
+                <h1 class="text-2xl font-bold text-slate-800 mt-5"><?= e($statusLabel) ?></h1>
+                <p class="text-slate-500 text-sm mt-3 leading-relaxed"><?= e($statusText) ?></p>
             </div>
 
             <?php if ($found): ?>
-            <!-- Datos mínimos de acreditación -->
             <div class="px-7 sm:px-9 py-7">
                 <dl class="space-y-4">
                     <div class="flex flex-wrap justify-between gap-2 border-b border-slate-100 pb-4">
                         <dt class="text-sm font-medium text-slate-500">Nombre</dt>
-                        <dd class="text-sm font-bold text-slate-800 text-right"><?= htmlspecialchars($fullName) ?></dd>
+                        <dd class="text-sm font-bold text-slate-800 text-right"><?= e($fullName) ?></dd>
                     </div>
                     <div class="flex flex-wrap justify-between gap-2 border-b border-slate-100 pb-4">
-                        <dt class="text-sm font-medium text-slate-500">Folio</dt>
-                        <dd class="text-sm font-mono font-bold text-slate-800"><?= htmlspecialchars($affiliate['affiliate_number']) ?></dd>
+                        <dt class="text-sm font-medium text-slate-500">Folio de afiliado</dt>
+                        <dd class="text-sm font-mono font-bold text-slate-800"><?= e($credential['affiliate_number']) ?></dd>
+                    </div>
+                    <div class="flex flex-wrap justify-between gap-2 border-b border-slate-100 pb-4">
+                        <dt class="text-sm font-medium text-slate-500">Credencial</dt>
+                        <dd class="text-sm font-mono text-slate-700"><?= e($credential['credential_number']) ?></dd>
                     </div>
                     <div class="flex flex-wrap justify-between gap-2 border-b border-slate-100 pb-4">
                         <dt class="text-sm font-medium text-slate-500">Situación</dt>
-                        <dd>
-                            <span class="text-xs font-bold px-3 py-1 rounded-full border <?= $chipClass ?>">
-                                <?= htmlspecialchars($affiliate['state']) ?>
-                            </span>
-                        </dd>
+                        <dd><?= estadoBadge($credential['status']) ?></dd>
                     </div>
-                    <?php if ($activeSub): ?>
+                    <?php if (!empty($credential['plan_name'])): ?>
                     <div class="flex flex-wrap justify-between gap-2 border-b border-slate-100 pb-4">
                         <dt class="text-sm font-medium text-slate-500">Tipo de afiliación</dt>
-                        <dd class="text-sm font-semibold text-slate-800 text-right"><?= htmlspecialchars($activeSub['plan_name']) ?></dd>
+                        <dd class="text-sm font-semibold text-slate-800 text-right"><?= e($credential['plan_name']) ?></dd>
                     </div>
+                    <?php endif; ?>
                     <div class="flex flex-wrap justify-between gap-2">
                         <dt class="text-sm font-medium text-slate-500">Vigencia</dt>
                         <dd class="text-sm font-semibold text-slate-800 text-right">
-                            <?= htmlspecialchars(date('d/m/Y', strtotime($activeSub['start_date']))) ?>
-                            &ndash;
-                            <?= htmlspecialchars(date('d/m/Y', strtotime($activeSub['end_date']))) ?>
+                            <?= fechaCorta($credential['issued_at']) ?> &ndash; <?= fechaCorta($credential['expires_at']) ?>
                         </dd>
                     </div>
-                    <?php endif; ?>
                 </dl>
             </div>
             <?php endif; ?>
 
-            <!-- Leyenda legal -->
             <div class="bg-slate-50 border-t border-slate-200 px-7 sm:px-9 py-5">
                 <p class="text-[11px] text-slate-600 leading-relaxed text-justify">
                     EL PORTADOR DE ESTA CREDENCIAL <strong>NO ES UN SERVIDOR PÚBLICO</strong> NI DEPENDE DE INSTITUCIÓN
@@ -131,7 +117,6 @@ if ($dbError) {
                 </p>
             </div>
 
-            <!-- Datos del organismo -->
             <div class="px-7 sm:px-9 py-5 text-white" style="background:linear-gradient(135deg,#0e85a5 0%,#0f8f52 100%);">
                 <p class="text-[11px] font-semibold tracking-wide text-white/80 mb-2">ORGANISMO EMISOR</p>
                 <p class="font-bold text-sm">Consejo de Derechos Humanos Querétaro</p>
@@ -143,11 +128,8 @@ if ($dbError) {
             </div>
         </div>
 
-        <!-- Consulta y contacto -->
         <div class="mt-7 text-center space-y-4">
-            <p class="text-xs text-slate-500">
-                Verificado el <?= date('d/m/Y \a \l\a\s H:i') ?> hrs.
-            </p>
+            <p class="text-xs text-slate-500">Verificado el <?= date('d/m/Y \a \l\a\s H:i') ?> hrs.</p>
             <p class="text-sm text-slate-600">
                 ¿Dudas sobre esta credencial?
                 <a href="<?= SITE_URL ?>/contacto.html" class="text-brand-600 font-semibold hover:text-leaf-600 transition-colors">Contacta al Consejo</a>
@@ -160,9 +142,7 @@ if ($dbError) {
 </main>
 
 <footer class="py-6 text-center">
-    <p class="text-xs text-slate-400">
-        © <?= date('Y') ?> Consejo de Derechos Humanos Querétaro · Organismo civil independiente
-    </p>
+    <p class="text-xs text-slate-400">© <?= date('Y') ?> Consejo de Derechos Humanos Querétaro · Organismo civil independiente</p>
 </footer>
 
 </body>

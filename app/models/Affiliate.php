@@ -13,74 +13,38 @@ class Affiliate extends Model {
         return $this->queryOne("SELECT * FROM affiliates WHERE user_id = ?", [$userId]);
     }
 
-    /**
-     * Resolve an affiliate from the public verification token carried by the
-     * QR code on their credential. Returns null when the token is unknown.
+    /*
+     * Aquí vivían findByVerificationToken(), findByNumberAndLastName() y
+     * ensureVerificationToken() cuando el token del QR estaba en la columna
+     * `affiliates.verification_token`.
+     *
+     * En cdhq_mobile ese token vive en `credentials.verification_token` (64
+     * hex) y cada renovación emite una credencial nueva conservando la
+     * anterior. Esa lógica se mudó al modelo Credential: no la dupliques aquí.
      */
-    public function findByVerificationToken(string $token): ?array {
-        // Only well-formed tokens ever touch the database
-        if (!preg_match('/^[a-f0-9]{32}$/i', $token)) {
-            return null;
-        }
-        return $this->queryOne(
-            "SELECT a.*, u.name AS user_name
-             FROM affiliates a
-             LEFT JOIN users u ON u.id = a.user_id
-             WHERE a.verification_token = ?",
-            [strtolower($token)]
-        );
-    }
 
     /**
-     * Búsqueda pública de respaldo para credenciales impresas cuyo QR ya no
-     * funciona. Exige folio Y apellido para que el padrón no pueda recorrerse
-     * probando folios consecutivos.
+     * Folio del afiliado.
+     *
+     * Debe coincidir EXACTAMENTE con el formato que genera la app móvil en
+     * api-mobile/api/membership_service.php:
+     *     sprintf('CDHQ-%s-%06d', date('y'), $userId)
+     * Si el portal usara otro formato, el mismo padrón tendría dos
+     * numeraciones distintas conviviendo.
      */
-    public function findByNumberAndLastName(string $number, string $lastName): ?array {
-        $number   = trim($number);
-        $lastName = trim($lastName);
-        if ($number === '' || $lastName === '') {
-            return null;
-        }
-        // La colación utf8mb4_unicode_ci hace la comparación insensible a
-        // mayúsculas y acentos, así que basta con la igualdad simple.
-        return $this->queryOne(
-            "SELECT a.*, u.name AS user_name
-             FROM affiliates a
-             LEFT JOIN users u ON u.id = a.user_id
-             WHERE a.affiliate_number = ? AND a.last_name = ?",
-            [$number, $lastName]
-        );
+    public function generateNumberForUser(int $userId): string {
+        return sprintf('CDHQ-%s-%06d', date('y'), $userId);
     }
 
-    /**
-     * Return the affiliate's verification token, creating one on the fly when
-     * the record predates the credential-verification migration.
-     */
-    public function ensureVerificationToken(int $affiliateId): string {
-        $row = $this->queryOne(
-            "SELECT verification_token FROM affiliates WHERE id = ?",
-            [$affiliateId]
-        );
-        if (!empty($row['verification_token'])) {
-            return $row['verification_token'];
-        }
-        $token = bin2hex(random_bytes(16));
-        $this->exec(
-            "UPDATE affiliates SET verification_token = ? WHERE id = ?",
-            [$token, $affiliateId]
-        );
-        return $token;
-    }
-
-    /** Generate next affiliate number CDHQ-YYYY-NNNN */
+    /** Folio para altas manuales sin usuario de la app asociado */
     public function generateNumber(): string {
-        $year = date('Y');
-        $count = (int) $this->queryColumn(
-            "SELECT COUNT(*) FROM affiliates WHERE affiliate_number LIKE ?",
-            ["CDHQ-{$year}-%"]
+        $yy   = date('y');
+        $next = (int) $this->queryColumn(
+            "SELECT COALESCE(MAX(CAST(SUBSTRING_INDEX(affiliate_number,'-',-1) AS UNSIGNED)),0) + 1
+             FROM affiliates WHERE affiliate_number LIKE ?",
+            ["CDHQ-{$yy}-%"]
         );
-        return sprintf('CDHQ-%s-%04d', $year, $count + 1);
+        return sprintf('CDHQ-%s-%06d', $yy, max($next, 900001));
     }
 
     public function listWithSearch(string $search = '', string $status = '', int $limit = 50, int $offset = 0): array {
@@ -139,22 +103,36 @@ class Affiliate extends Model {
         );
     }
 
+    /**
+     * Historial de cambios del afiliado.
+     *
+     * La tabla `affiliate_history` del sistema anterior NO existe en
+     * cdhq_mobile. El historial se lee ahora de `activity_log`, que es la
+     * bitácora que comparten el portal y la aplicación móvil.
+     */
     public function getHistory(int $affiliateId): array {
         return $this->query(
-            "SELECT ah.*, u.name AS changed_by_name
-             FROM affiliate_history ah
-             LEFT JOIN users u ON u.id = ah.changed_by
-             WHERE ah.affiliate_id = ?
-             ORDER BY ah.created_at DESC", [$affiliateId]
+            "SELECT al.action AS field_changed,
+                    al.details AS reason,
+                    al.created_at,
+                    u.name AS changed_by_name
+             FROM activity_log al
+             LEFT JOIN users u ON u.id = al.user_id
+             WHERE al.entity = 'affiliates' AND al.entity_id = ?
+             ORDER BY al.created_at DESC",
+            [$affiliateId]
         );
     }
 
+    /** Registra un cambio del afiliado en la bitácora compartida */
     public function logHistory(int $affiliateId, string $field, string $oldVal, string $newVal, string $reason = ''): void {
-        $this->exec(
-            "INSERT INTO affiliate_history (affiliate_id, field_changed, old_value, new_value, reason, changed_by, created_at)
-             VALUES (?, ?, ?, ?, ?, ?, NOW())",
-            [$affiliateId, $field, $oldVal, $newVal, $reason, $_SESSION['user_id'] ?? 0]
-        );
+        $detalle = trim(sprintf('%s: %s → %s%s',
+            $field,
+            $oldVal !== '' ? $oldVal : '(vacío)',
+            $newVal,
+            $reason !== '' ? ' · ' . $reason : ''
+        ));
+        Auth::logActivity('CAMBIO_AFILIADO', 'affiliates', $affiliateId, $detalle);
     }
 
     public function statsByState(): array {
