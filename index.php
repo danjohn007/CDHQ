@@ -29,13 +29,28 @@ $router->get('login',         'AuthController', 'showLogin');
 $router->post('login',        'AuthController', 'login');
 $router->get('logout',        'AuthController', 'logout');
 
-// Dashboard
-$router->get('',              'DashboardController', 'index');
+// Panel administrativo (exige sesión de administrador; ya no vive en la raíz)
 $router->get('dashboard',     'DashboardController', 'index');
 
+// ─── Sitio público ────────────────────────────────────────────────────────────
+// La raíz del dominio muestra la landing del Consejo, no el panel. El botón
+// «Acceso al sistema» de esas páginas manda a /login; de ahí en adelante todo
+// exige sesión de administrador. Junto con /login y /verificar, son las únicas
+// rutas del portal que no requieren sesión.
+$router->get('',                          'LandingController', 'index');
+$router->get('index.html',                'LandingController', 'index');
+$router->get('derechos.html',             'LandingController', 'derechos');
+$router->get('servicios.html',            'LandingController', 'servicios');
+$router->get('nosotros.html',             'LandingController', 'nosotros');
+$router->get('contacto.html',             'LandingController', 'contacto');
+$router->get('aviso-de-privacidad.html',  'LandingController', 'privacidad');
+$router->get('cdhq.css',                  'LandingController', 'css');
+$router->get('cdhq.js',                   'LandingController', 'js');
+
 // ─── Verificación PÚBLICA de credenciales ────────────────────────────────────
-// Destino del código QR impreso. Junto con /login, son las únicas rutas que no
-// exigen sesión. Se declaran primero para dejar claro que son la excepción.
+// Destino del código QR impreso. Junto con /login y la landing, son las únicas
+// rutas que no exigen sesión. Se declaran primero para dejar claro que son la
+// excepción.
 $router->get('verificar',                'CredentialsController', 'verifyForm');
 $router->get('verificar/:token',         'CredentialsController', 'verify');
 $router->get('verify/:token',            'CredentialsController', 'verify');
