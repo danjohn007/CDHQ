@@ -5,7 +5,7 @@ require_once MODELS_PATH . '/Config.php';
 class ConfigController extends Controller {
 
     public function index(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN);
+        Auth::requireAdmin();
         $model  = new Config();
         $config = $model->getAll();
 
@@ -25,7 +25,7 @@ class ConfigController extends Controller {
     }
 
     public function update(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN);
+        Auth::requireAdmin();
         $this->verifyCsrf();
 
         $model  = new Config();

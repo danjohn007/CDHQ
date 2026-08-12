@@ -6,7 +6,7 @@ require_once MODELS_PATH . '/Affiliate.php';
 class FinancialController extends Controller {
 
     public function index(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_FINANCIERO);
+        Auth::requireAdmin();
         $model   = new Payment();
         $filters = [
             'type'      => trim($_GET['type']      ?? ''),
@@ -27,7 +27,7 @@ class FinancialController extends Controller {
     }
 
     public function create(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_FINANCIERO);
+        Auth::requireAdmin();
         $affiliateModel = new Affiliate();
         $affiliates = $affiliateModel->listWithSearch('', '', 200, 0);
         $this->view('financial/create', [
@@ -37,7 +37,7 @@ class FinancialController extends Controller {
     }
 
     public function store(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_FINANCIERO);
+        Auth::requireAdmin();
         $this->verifyCsrf();
 
         $model = new Payment();

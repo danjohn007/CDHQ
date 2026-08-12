@@ -23,7 +23,7 @@ class AuthController extends Controller {
         if (Auth::login($email, $password)) {
             $this->redirect('dashboard');
         } else {
-            $this->flash('error', 'Credenciales inválidas o cuenta inactiva.');
+            $this->flash('error', Auth::lastLoginError() ?: 'Credenciales inválidas o cuenta inactiva.');
             $this->redirect('login');
         }
     }

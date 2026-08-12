@@ -6,7 +6,7 @@ require_once MODELS_PATH . '/Affiliate.php';
 class SubscriptionsController extends Controller {
 
     public function index(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $model = new Subscription();
         $subs  = $model->listAll(50, 0);
         $plans = $model->getPlans();
@@ -18,7 +18,7 @@ class SubscriptionsController extends Controller {
     }
 
     public function create(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $model = new Subscription();
         $affiliateModel = new Affiliate();
         $plans = $model->getPlans();
@@ -31,7 +31,7 @@ class SubscriptionsController extends Controller {
     }
 
     public function store(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $this->verifyCsrf();
 
         $affiliateId = (int)($_POST['affiliate_id'] ?? 0);

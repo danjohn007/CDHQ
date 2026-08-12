@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0e85a5">
+    <meta name="description" content="Catálogo de derechos humanos reconocidos en la Constitución Política de los Estados Unidos Mexicanos, explicados en lenguaje claro por el CDHQ.">
+    <title>Derechos Humanos | CDHQ – Consejo de Derechos Humanos Querétaro</title>
+    <link rel="icon" href="CDHQ%20VERTICAL.png">
+    <link rel="apple-touch-icon" href="CDHQ%20VERTICAL.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="cdhq.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="cdhq.css">
+
+    <!-- ─── Bloque crítico: va inline A PROPÓSITO ─────────────────────────────
+         No vive en cdhq.js ni en cdhq.css para que la página siga siendo
+         legible aunque esos archivos falten en el servidor o den error. -->
+    <script>
+        tailwind.config = { theme: { extend: { colors: {
+            brand: { 50:'#f0fbfd',100:'#dbf3fa',200:'#b6e7f2',300:'#82d5e8',400:'#3fb5d3',500:'#0e85a5',600:'#0c7290',700:'#0e5c75',800:'#124b60',900:'#143f51' },
+            leaf:  { 50:'#eefbee',100:'#d7f6d7',200:'#aeeaae',300:'#75d975',400:'#33c433',500:'#00ac00',600:'#009300',700:'#047604',800:'#085d08',900:'#094c09' }
+        } } } };
+    </script>
+    <style>
+        /* AOS deja todo en opacity:0 hasta inicializarse. Si su JS no carga,
+           la página entera se vería en blanco: esta regla la mantiene visible
+           hasta que cdhq.js confirma que AOS arrancó. */
+        html:not(.aos-ready) [data-aos] { opacity: 1 !important; transform: none !important; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <a href="https://wa.me/524423810010?text=Hola%2C%20tengo%20una%20duda%20sobre%20mis%20derechos%20y%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n."
+       target="_blank" rel="noopener noreferrer"
+       class="whatsapp-float bg-leaf-500 text-white rounded-full p-4 shadow-lg hover:bg-leaf-600 transition-colors duration-200 flex items-center justify-center"
+       aria-label="WhatsApp">
+        <span class="whatsapp-pulse" aria-hidden="true"></span>
+        <i class="fab fa-whatsapp text-2xl relative z-10"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-[0_2px_18px_-12px_rgba(14,133,165,0.6)]">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <div class="flex items-center justify-between gap-4">
+                <a href="index.html" class="flex items-center shrink-0" aria-label="CDHQ · Inicio">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="Consejo de Derechos Humanos Querétaro" class="h-9 sm:h-11 w-auto">
+                </a>
+                <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-slate-600 font-medium text-sm lg:text-[0.95rem]">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                    <a href="nosotros.html" class="nav-link">Nosotros</a>
+                    <a href="derechos.html" class="nav-link is-active">Derechos</a>
+                    <a href="servicios.html" class="nav-link">Servicios</a>
+                    <a href="contacto.html" class="nav-link">Contacto</a>
+                    <a href="/sistema/" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm">
+                        <i class="fas fa-right-to-bracket text-xs"></i> Sistema
+                    </a>
+                </nav>
+                <button id="navToggle" type="button" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border border-brand-100 text-brand-600" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav id="mobileMenu" class="hidden md:hidden flex-col gap-1 pt-4 mt-4 border-t border-brand-100">
+                <a href="index.html" class="mobile-nav-link">Inicio</a>
+                <a href="nosotros.html" class="mobile-nav-link">Nosotros</a>
+                <a href="derechos.html" class="mobile-nav-link is-active">Derechos</a>
+                <a href="servicios.html" class="mobile-nav-link">Servicios</a>
+                <a href="contacto.html" class="mobile-nav-link">Contacto</a>
+                <a href="/sistema/" class="mobile-nav-link text-brand-700 font-semibold"><i class="fas fa-right-to-bracket mr-1"></i> Acceso al sistema</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Encabezado de página -->
+        <section class="page-hero py-16 md:py-24">
+            <div class="hero-blob absolute -top-28 -right-20 w-80 h-80 bg-brand-200/45 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="hero-blob hero-blob-delay absolute -bottom-24 -left-20 w-80 h-80 bg-leaf-200/40 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6 max-w-4xl text-center" data-aos="fade-up">
+                <nav class="text-sm text-slate-500 mb-5" aria-label="Ruta de navegación">
+                    <a href="index.html" class="hover:text-brand-600 transition-colors">Inicio</a>
+                    <span class="mx-2 text-slate-300">/</span>
+                    <span class="text-brand-600 font-medium">Derechos humanos</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
+                    Conoce tus <span class="bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">derechos</span>
+                </h1>
+                <p class="text-slate-600 text-lg mt-5 leading-relaxed">
+                    Un derecho que no se conoce difícilmente se ejerce. Aquí encuentras, en lenguaje claro,
+                    los derechos reconocidos por la Constitución Política de los Estados Unidos Mexicanos.
+                </p>
+            </div>
+        </section>
+
+        <!-- ¿Qué son los derechos humanos? -->
+        <section id="que-son" class="py-16 md:py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+                    <div data-aos="fade-right">
+                        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-leaf-600 mb-3">
+                            <span class="w-8 h-px bg-leaf-500"></span> Conceptos básicos
+                        </span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-800 leading-tight">
+                            ¿Qué son los <span class="text-brand-600">derechos humanos</span>?
+                        </h2>
+                        <p class="text-slate-600 mt-5 leading-relaxed">
+                            Son inherentes a todos los seres humanos, sin distinción de nacionalidad, lugar de residencia,
+                            sexo, origen étnico, color, religión, lengua o cualquier otra condición. Todas las personas
+                            tenemos los mismos derechos, sin discriminación alguna.
+                        </p>
+                        <p class="text-slate-600 mt-4 leading-relaxed">
+                            Están contemplados en la <strong class="text-slate-800">Constitución Política de los Estados
+                            Unidos Mexicanos</strong>, en los tratados internacionales, el derecho internacional
+                            consuetudinario y los principios generales del derecho.
+                        </p>
+                        <p class="text-slate-600 mt-4 leading-relaxed">
+                            El respeto a los derechos humanos de cada persona es un deber de todos. Todas las autoridades,
+                            en el ámbito de sus competencias, tienen la obligación de
+                            <strong class="text-slate-800">promover, respetar, proteger y garantizar</strong> los derechos
+                            consignados en favor del individuo.
+                        </p>
+                        <div class="mt-7 flex flex-wrap gap-2.5">
+                            <span class="bg-white border border-brand-100 text-brand-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Universales</span>
+                            <span class="bg-white border border-brand-100 text-brand-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Interrelacionados</span>
+                            <span class="bg-white border border-leaf-100 text-leaf-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Interdependientes</span>
+                            <span class="bg-white border border-leaf-100 text-leaf-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Indivisibles</span>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl p-8 sm:p-10 text-white shadow-xl relative overflow-hidden" style="background:linear-gradient(150deg,#0e85a5 0%,#0e5c75 100%);" data-aos="fade-left" data-aos-delay="100">
+                        <i class="fas fa-quote-left text-white/20 text-6xl absolute top-5 right-6"></i>
+                        <p class="text-xs font-semibold tracking-widest uppercase text-white/70 mb-4">Artículo 1° Constitucional</p>
+                        <blockquote class="text-white/95 leading-relaxed relative z-10">
+                            "En los Estados Unidos Mexicanos todas las personas gozarán de los derechos humanos reconocidos
+                            en esta Constitución y en los tratados internacionales de los que el Estado Mexicano sea parte,
+                            así como de las garantías para su protección, cuyo ejercicio no podrá restringirse ni
+                            suspenderse, salvo en los casos y bajo las condiciones que esta Constitución establece."
+                        </blockquote>
+                        <div class="mt-6 pt-5 border-t border-white/20 flex items-center gap-3">
+                            <img src="CDHQ%20HORIZONTAL%20B.png" alt="CDHQ" class="h-7 w-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Los más consultados -->
+        <section class="relative py-16 md:py-24 overflow-hidden" style="background:linear-gradient(180deg,#ffffff 0%,#f2fbfd 55%,#f0fbf4 100%);">
+            <div class="absolute inset-0 dot-grid opacity-60 pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Los derechos más consultados</h2>
+                    <p class="text-slate-500 mt-3">Estos son los temas por los que más se acerca la gente al Consejo.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600"><i class="fas fa-shield-heart text-xl"></i></div>
+                            <span class="text-[11px] font-semibold text-leaf-700 bg-leaf-50 border border-leaf-100 px-2.5 py-1 rounded-full">Art. 1°</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Derecho a la Vida</h3>
+                        <p class="text-slate-500 mt-2 text-sm leading-relaxed">Toda persona tiene derecho a que su vida sea respetada y protegida. Nadie puede privar de la vida a otra persona.</p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600"><i class="fas fa-heart-pulse text-xl"></i></div>
+                            <span class="text-[11px] font-semibold text-leaf-700 bg-leaf-50 border border-leaf-100 px-2.5 py-1 rounded-full">Art. 4°</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Derecho a la Salud</h3>
+                        <p class="text-slate-500 mt-2 text-sm leading-relaxed">Protección de la salud y servicios médicos oportunos, profesionales, idóneos y responsables.</p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600"><i class="fas fa-book-open-reader text-xl"></i></div>
+                            <span class="text-[11px] font-semibold text-leaf-700 bg-leaf-50 border border-leaf-100 px-2.5 py-1 rounded-full">Art. 3°</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Derecho a la Educación</h3>
+                        <p class="text-slate-500 mt-2 text-sm leading-relaxed">Educación gratuita y laica en preescolar, primaria, secundaria y media superior.</p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="250">
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600"><i class="fas fa-scale-balanced text-xl"></i></div>
+                            <span class="text-[11px] font-semibold text-leaf-700 bg-leaf-50 border border-leaf-100 px-2.5 py-1 rounded-full">Art. 1°</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Igualdad y No Discriminación</h3>
+                        <p class="text-slate-500 mt-2 text-sm leading-relaxed">Prohibida toda exclusión por origen étnico, género, edad, discapacidad, religión, opiniones o preferencias.</p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600"><i class="fas fa-briefcase text-xl"></i></div>
+                            <span class="text-[11px] font-semibold text-leaf-700 bg-leaf-50 border border-leaf-100 px-2.5 py-1 rounded-full">Art. 123</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Derechos en el Trabajo</h3>
+                        <p class="text-slate-500 mt-2 text-sm leading-relaxed">Trabajo digno y socialmente útil, condiciones seguras, descanso y libertad sindical.</p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-6 shadow-sm" data-aos="fade-up" data-aos-delay="350">
+                        <div class="flex items-start justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600"><i class="fas fa-feather text-xl"></i></div>
+                            <span class="text-[11px] font-semibold text-leaf-700 bg-leaf-50 border border-leaf-100 px-2.5 py-1 rounded-full">Art. 2°</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Pueblos y Comunidades Indígenas</h3>
+                        <p class="text-slate-500 mt-2 text-sm leading-relaxed">Libre determinación, cultura, lengua, consulta previa, tierras y participación política.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catálogo completo -->
+        <section id="catalogo" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 border border-brand-100 text-brand-600 mb-4">
+                        <i class="fas fa-list-check text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Catálogo completo</h2>
+                    <p class="text-slate-500 mt-3">Toca cualquier derecho para leer su explicación y su fundamento constitucional.</p>
+                </div>
+
+                <!-- Grupo 1: Civiles y políticos -->
+                <div class="max-w-3xl mx-auto mb-12" data-aos="fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-9 h-9 rounded-xl bg-brand-500 text-white flex items-center justify-center text-sm"><i class="fas fa-landmark"></i></span>
+                        <h3 class="text-xl font-bold text-slate-800">Derechos civiles y políticos</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-shield-heart"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho a la vida <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 1°</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho a que su vida sea respetada. Este derecho se entiende en dos sentidos:</p>
+                                <ul class="mt-2 space-y-1.5 list-disc pl-5">
+                                    <li>Como una <strong>obligación del Estado</strong> de respetar la vida en el ejercicio de sus funciones.</li>
+                                    <li>Como una <strong>limitación a los particulares</strong>, para que ninguna persona prive de la vida a otra.</li>
+                                </ul>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-scale-balanced"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Igualdad y prohibición de la discriminación</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Todas las personas tienen derecho a gozar y disfrutar de la misma manera los derechos reconocidos por la Constitución, los tratados internacionales y las leyes.</p>
+                                <p class="mt-2">Se prohíbe toda exclusión o trato diferenciado motivado por origen étnico o nacional, género, edad, discapacidades, condición social, condiciones de salud, religión, opiniones, preferencias sexuales, estado civil o cualquier otra que atente contra la dignidad humana. En México, los títulos de nobleza, privilegios u honores hereditarios no tienen validez.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-id-card"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho a la identidad</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho a la identidad y a ser registrada gratuitamente de manera inmediata a su nacimiento; el Estado mexicano está obligado a garantizarlo.</p>
+                                <p class="mt-2">El derecho al nombre propio, a la personalidad jurídica y a la nacionalidad constituye el <strong>derecho primigenio</strong>: es la llave de acceso a otros derechos esenciales como la salud, la educación, la protección y la inclusión en la vida económica, cultural y política. Es universal, no caduca, y es único, irrenunciable, intransferible e indivisible.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-hand"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Integridad personal <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 22</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Quedan prohibidas las penas de muerte, de mutilación, de infamia, la marca, los azotes, los palos, el tormento de cualquier especie, la multa excesiva, la confiscación de bienes y cualesquiera otras penas inusitadas y trascendentales.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-gavel"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Audiencia y debido proceso legal</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Es el derecho de toda persona a ejercer su defensa y ser oída, con las debidas oportunidades y dentro de un plazo razonable, por la autoridad competente, antes del reconocimiento o restricción de sus derechos y obligaciones. El debido proceso debe contemplar:</p>
+                                <ul class="mt-2 space-y-1.5 list-disc pl-5">
+                                    <li>El aviso de inicio del procedimiento.</li>
+                                    <li>La oportunidad de ofrecer pruebas y alegar.</li>
+                                    <li>Una resolución que resuelva las cuestiones debatidas.</li>
+                                    <li>La posibilidad de reclamar la resolución mediante un recurso eficaz.</li>
+                                </ul>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-dove"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Libertad religiosa y de culto <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 24</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Es el derecho a elegir libremente la religión o las creencias que se desee profesar, a practicarlas en privado o en público y a cambiarlas cuando así se decida. Incluye reunirse pacíficamente con fines religiosos y realizar ceremonias o actos de culto, siempre que no constituyan delito ni se usen con fines políticos o de proselitismo.</p>
+                                <p class="mt-2">También comprende el derecho a <strong>no</strong> profesar creencias y a no pertenecer a una asociación religiosa. El Estado no puede establecer preferencias o privilegios en favor de religión, iglesia o agrupación alguna.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-route"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Libertad de tránsito, residencia y asilo</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho a entrar en la República, salir de ella, viajar por su territorio y mudar de residencia, sin necesidad de carta de seguridad, pasaporte, salvoconducto u otros requisitos semejantes. Este derecho está subordinado a las facultades de la autoridad judicial en casos de responsabilidad criminal o civil, y a las de la autoridad administrativa respecto de las leyes de emigración, inmigración y salubridad general.</p>
+                                <p class="mt-2">Asimismo, toda persona tiene derecho a <strong>buscar y recibir asilo</strong>. El reconocimiento de la condición de refugiado y el otorgamiento de asilo político se realizan conforme a los tratados internacionales.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center"><i class="fas fa-key"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho a la propiedad</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Es la prerrogativa de toda persona de usar, gozar, disfrutar y disponer de sus bienes de acuerdo con la ley. El Estado debe protegerlo: nadie puede ser privado ni molestado en sus bienes sino en virtud de un juicio que cumpla las formalidades esenciales del procedimiento.</p>
+                                <p class="mt-2">Sólo en caso de interés público, y mediante la debida indemnización, el Estado puede restringir el derecho a usar, disfrutar y disponer de ella.</p>
+                            </div></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grupo 2: Económicos, sociales y culturales -->
+                <div class="max-w-3xl mx-auto mb-12" data-aos="fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-9 h-9 rounded-xl bg-leaf-500 text-white flex items-center justify-center text-sm"><i class="fas fa-seedling"></i></span>
+                        <h3 class="text-xl font-bold text-slate-800">Derechos económicos, sociales y culturales</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-heart-pulse"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho a la salud <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 4°</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho a la protección de la salud. Quien hace uso de los servicios de salud tiene derecho a obtener prestaciones <strong>oportunas, profesionales, idóneas y responsables</strong>.</p>
+                                <p class="mt-2">El Estado otorga servicios de salud a través de la Federación, los Estados y los Municipios de acuerdo con la ley. La ley define un sistema de salud para el bienestar, con el fin de garantizar la extensión progresiva de los servicios para la atención integral y gratuita de las personas que no cuenten con seguridad social.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-book-open-reader"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho a la educación <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 3°</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho a recibir educación. En México los niveles preescolar, primaria, secundaria y media superior son <strong>gratuitos y laicos</strong>.</p>
+                                <p class="mt-2">Los padres o tutores tienen la obligación de hacer que sus hijas, hijos o pupilos acudan a recibir educación. Los particulares pueden impartir educación en todos sus tipos y modalidades, pero deben cumplir los requisitos establecidos en la Constitución y en la legislación correspondiente.</p>
+                                <p class="mt-2">El Estado —Federación, Estados, Ciudad de México y Municipios— imparte y garantiza la educación inicial, preescolar, primaria, secundaria, media superior y superior. La educación inicial es un derecho de la niñez.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-briefcase"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derechos en el trabajo <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 123</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho al <strong>trabajo digno y socialmente útil</strong>. Estos derechos tienen dos dimensiones:</p>
+                                <p class="mt-2"><strong>Individual:</strong> ser capacitada; estar protegida frente a la explotación; contar con condiciones de seguridad e higiene; trabajar un número de horas razonable; gozar de vacaciones y días festivos; descansar y disfrutar del tiempo libre; y permanecer o ascender en el trabajo sin ser excluida o despedida por alguna circunstancia discriminatoria.</p>
+                                <p class="mt-2"><strong>Colectiva:</strong> conformar o integrarse libremente a sindicatos o asociaciones para la defensa de sus derechos, agruparse en federaciones o confederaciones nacionales e internacionales, e incluso suspender temporalmente el trabajo, lo que se conoce como huelga.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-hand-holding-medical"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho a la seguridad social</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Implica que el Estado debe realizar las acciones pertinentes para proporcionar servicios médicos y protección económica por enfermedad, maternidad, accidente de trabajo, desempleo, invalidez o vejez.</p>
+                                <p class="mt-2">Por ejemplo: cuando una persona sufre un accidente laboral o es despedida, debe recibir un apoyo económico que le permita solventar sus necesidades; y las personas adultas mayores deben recibir la protección del Estado a través de lo que comúnmente se denomina pensión.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-house-chimney"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho a la vivienda</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene el derecho de tener acceso a una <strong>vivienda adecuada</strong>. El Estado debe adoptar medidas legislativas y de otra índole razonables, dentro de los recursos de que dispone, para lograr la realización progresiva de este derecho.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-leaf"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Derecho al medio ambiente sano <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 4°</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>La Constitución reconoce, en el párrafo quinto del artículo 4°, que toda persona tiene derecho a un <strong>medio ambiente sano para su desarrollo y bienestar</strong>. El Estado garantiza el respeto a este derecho y el daño o deterioro ambiental genera responsabilidad para quien lo provoque, en los términos que disponga la ley.</p>
+                                <p class="mt-2">El marco jurídico ambiental en México es concurrente entre los tres órdenes de gobierno; su instrumento marco es la Ley General del Equilibrio Ecológico y la Protección al Ambiente (LGEEPA).</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-user-tie"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Libertad de trabajo, profesión, industria o comercio</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho a dedicarse a la profesión, industria, comercio o trabajo que le acomode, siendo lícitos. El ejercicio de esta libertad sólo puede limitarse por determinación de autoridad competente y dentro de los términos que marque la ley.</p>
+                                <p class="mt-2">Nadie puede ser privado del producto de su trabajo, sino por resolución judicial.</p>
+                            </div></div></div>
+                        </div>
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-leaf-50 text-leaf-600 flex items-center justify-center"><i class="fas fa-person-running"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Cultura física y deporte</span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Toda persona tiene derecho a la cultura física y a la práctica del deporte. Corresponde al Estado su promoción, fomento y estímulo conforme a las leyes en la materia.</p>
+                            </div></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grupo 3: Derechos colectivos -->
+                <div class="max-w-3xl mx-auto" data-aos="fade-up">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-9 h-9 rounded-xl bg-brand-700 text-white flex items-center justify-center text-sm"><i class="fas fa-people-group"></i></span>
+                        <h3 class="text-xl font-bold text-slate-800">Derechos colectivos</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="acc-item bg-white rounded-2xl border border-slate-200 transition-all">
+                            <button type="button" class="acc-trigger w-full flex items-center gap-4 text-left px-5 py-4" aria-expanded="false">
+                                <span class="w-10 h-10 shrink-0 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center"><i class="fas fa-feather"></i></span>
+                                <span class="flex-1 font-semibold text-slate-800">Pueblos y comunidades indígenas <span class="hidden sm:inline text-xs font-medium text-slate-400">· Art. 2°</span></span>
+                                <i class="fas fa-chevron-down acc-chevron text-slate-400 text-sm"></i>
+                            </button>
+                            <div class="acc-panel"><div><div class="px-5 pb-5 text-slate-600 text-sm leading-relaxed">
+                                <p>Los pueblos y comunidades indígenas tienen derecho a la <strong>autonomía y a la libre determinación</strong>, al uso y aplicación de su derecho consuetudinario, a su lengua, a la consulta previa, a la preservación de su cultura y al acceso a la tenencia de la tierra y al uso y disfrute racional de los recursos naturales.</p>
+                                <p class="mt-2">En el marco de los derechos políticos, en los municipios con población indígena tienen derecho a nombrar representantes ante los ayuntamientos y a desempeñar los cargos públicos y de elección popular para los que hayan sido electos o designados. Se impulsa su representación y participación en la adopción de políticas públicas.</p>
+                                <p class="mt-2">La Nación Mexicana tiene una composición pluricultural sustentada originalmente en sus pueblos indígenas. La conciencia de la identidad indígena es criterio fundamental para determinar a quiénes se aplican estas disposiciones.</p>
+                            </div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aviso / CTA -->
+        <section class="relative py-20 text-white overflow-hidden" style="background:linear-gradient(135deg,#0e85a5 0%,#0b7d8e 55%,#0f8f52 100%);">
+            <div class="absolute -top-16 -right-16 w-72 h-72 bg-leaf-300/25 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -left-16 w-72 h-72 bg-white/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6 text-center max-w-3xl" data-aos="fade-up">
+                <i class="fas fa-circle-question text-white/90 text-3xl mb-4"></i>
+                <h2 class="text-3xl font-bold">¿Crees que se vulneró alguno de tus derechos?</h2>
+                <p class="text-white/85 mt-3 mb-8">Cuéntanos tu caso. Te orientamos sin costo sobre qué derecho te asiste y ante qué instancia puedes hacerlo valer.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="magnetic-wrap">
+                        <a href="https://wa.me/524423810010?text=Hola%2C%20creo%20que%20se%20vulner%C3%B3%20uno%20de%20mis%20derechos%20y%20me%20gustar%C3%ADa%20recibir%20orientaci%C3%B3n."
+                           target="_blank" rel="noopener noreferrer"
+                           class="magnetic-btn magnetic-solid inline-flex items-center gap-2 bg-white text-brand-700 hover:text-brand-800 font-semibold px-7 py-3.5 rounded-full shadow-lg transition-colors" style="--glow-color:#00ac00">
+                            <span class="glow-layer" aria-hidden="true"></span>
+                            <span class="btn-label"><i class="fab fa-whatsapp text-xl text-leaf-500"></i> Pedir orientación</span>
+                        </a>
+                    </span>
+                    <span class="magnetic-wrap">
+                        <a href="servicios.html" class="magnetic-btn magnetic-outline inline-flex items-center gap-2 border border-white/40 hover:border-white text-white font-semibold px-7 py-3.5 rounded-full transition-colors" style="--glow-color:#ffffff">
+                            <span class="glow-layer" aria-hidden="true"></span>
+                            <span class="btn-label"><i class="fas fa-hands-helping"></i> Cómo te acompañamos</span>
+                        </a>
+                    </span>
+                </div>
+                <p class="text-white/70 text-xs mt-8 max-w-xl mx-auto">
+                    La información de esta página es divulgativa y no sustituye la asesoría jurídica particular.
+                    Los textos citados provienen de la Constitución Política de los Estados Unidos Mexicanos.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative pt-14 pb-10" style="background:linear-gradient(180deg,#f2fbfd 0%,#e9f6f1 100%);">
+        <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(90deg,#0e85a5,#00ac00);"></div>
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid md:grid-cols-4 gap-10 md:gap-8">
+                <div class="md:col-span-2">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="CDHQ" class="h-11 w-auto mb-4">
+                    <p class="text-slate-600 text-sm leading-relaxed max-w-sm">
+                        Consejo de Derechos Humanos Querétaro. Organismo civil independiente, sin fines de lucro,
+                        dedicado a la promoción, defensa y acompañamiento de los derechos humanos.
+                    </p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-leaf-500 hover:text-white hover:border-leaf-500 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Navegación</h3>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="index.html" class="text-slate-600 hover:text-brand-600 transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="text-slate-600 hover:text-brand-600 transition-colors">Nosotros</a></li>
+                        <li><a href="derechos.html" class="text-slate-600 hover:text-brand-600 transition-colors">Derechos humanos</a></li>
+                        <li><a href="servicios.html" class="text-slate-600 hover:text-brand-600 transition-colors">Servicios</a></li>
+                        <li><a href="contacto.html" class="text-slate-600 hover:text-brand-600 transition-colors">Contacto</a></li>
+                        <li><a href="/sistema/verificar" class="text-slate-600 hover:text-brand-600 transition-colors">Verificar credencial</a></li>
+                        <li><a href="aviso-de-privacidad.html" class="text-slate-600 hover:text-brand-600 transition-colors">Aviso de privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Contacto</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-2.5"><i class="fas fa-map-marker-alt text-brand-500 mt-1"></i><span>Paseo Constitución No. 100, Villas del Parque, Querétaro, Qro.</span></li>
+                        <li class="flex gap-2.5"><i class="fas fa-phone-alt text-brand-500 mt-1"></i><a href="tel:+524422956843" class="hover:text-brand-600 transition-colors">+52 442 295 6843</a></li>
+                        <li class="flex gap-2.5"><i class="fab fa-whatsapp text-leaf-500 mt-1"></i><a href="https://wa.me/524423810010" target="_blank" rel="noopener noreferrer" class="hover:text-leaf-600 transition-colors">+52 442 381 0010</a></li>
+                        <li class="flex gap-2.5"><i class="fas fa-envelope text-brand-500 mt-1"></i><a href="mailto:contacto@cdhq.digital" class="hover:text-brand-600 transition-colors">contacto@cdhq.digital</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-8 border-brand-100">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                <p class="text-slate-500 text-sm">© 2026 Consejo de Derechos Humanos Querétaro · Todos los derechos reservados</p>
+                <p class="text-slate-500 text-sm">Organismo civil independiente · Apoyo voluntario</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>

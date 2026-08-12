@@ -7,7 +7,7 @@ require_once MODELS_PATH . '/Payment.php';
 class AffiliatesController extends Controller {
 
     public function index(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS, ROLE_EJECUTIVO_PROSPECTOS);
+        Auth::requireAdmin();
         $model  = new Affiliate();
         $search = trim($_GET['search'] ?? '');
         $status = trim($_GET['status'] ?? '');
@@ -31,17 +31,19 @@ class AffiliatesController extends Controller {
     }
 
     public function create(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $this->view('affiliates/create', ['title' => 'Nuevo Afiliado']);
     }
 
     public function store(): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $this->verifyCsrf();
 
         $model  = new Affiliate();
         $number = $model->generateNumber();
 
+        // Ojo: en cdhq_mobile el token del QR NO vive en `affiliates`, sino en
+        // `credentials.verification_token`, y se genera al emitir la credencial.
         $data = [
             'affiliate_number' => $number,
             'first_name'  => trim($_POST['first_name']  ?? ''),
@@ -70,7 +72,7 @@ class AffiliatesController extends Controller {
     }
 
     public function show(string $id): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS, ROLE_EJECUTIVO_PROSPECTOS, ROLE_AFILIADO);
+        Auth::requireAdmin();
         $model    = new Affiliate();
         $affiliate = $model->findWithDetails((int)$id);
         if (!$affiliate) { $this->flash('error', 'Afiliado no encontrado.'); $this->redirect('affiliates'); }
@@ -93,7 +95,7 @@ class AffiliatesController extends Controller {
     }
 
     public function edit(string $id): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $model    = new Affiliate();
         $affiliate = $model->find((int)$id);
         if (!$affiliate) { $this->flash('error', 'Afiliado no encontrado.'); $this->redirect('affiliates'); }
@@ -101,7 +103,7 @@ class AffiliatesController extends Controller {
     }
 
     public function update(string $id): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $this->verifyCsrf();
         $model    = new Affiliate();
         $old      = $model->find((int)$id);
@@ -126,7 +128,7 @@ class AffiliatesController extends Controller {
     }
 
     public function changeStatus(string $id): void {
-        Auth::requireRole(ROLE_SUPER_ADMIN, ROLE_ADMIN_MEMBRESIAS);
+        Auth::requireAdmin();
         $this->verifyCsrf();
         $model    = new Affiliate();
         $old      = $model->find((int)$id);

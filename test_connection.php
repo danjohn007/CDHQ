@@ -36,6 +36,63 @@ $checks[] = [
     'message' => 'Detectado automáticamente',
 ];
 
+// 3b. .htaccess presente en el directorio de instalación
+$htaccessPath = __DIR__ . '/.htaccess';
+$htaccessOk   = is_file($htaccessPath);
+$checks[] = [
+    'label'   => 'Archivo .htaccess',
+    'value'   => $htaccessOk ? 'Presente' : 'NO ENCONTRADO',
+    'ok'      => $htaccessOk,
+    'message' => $htaccessOk
+        ? 'OK'
+        : 'Súbelo al servidor (es un archivo oculto, actívalos en el gestor de archivos)',
+];
+
+// 3c. mod_rewrite disponible (sólo detectable con mod_php)
+if (function_exists('apache_get_modules')) {
+    $rewriteOk = in_array('mod_rewrite', apache_get_modules(), true);
+    $checks[]  = [
+        'label'   => 'Módulo mod_rewrite',
+        'value'   => $rewriteOk ? 'Activo' : 'No cargado',
+        'ok'      => $rewriteOk,
+        'message' => $rewriteOk ? 'OK' : 'Actívalo o pon PRETTY_URLS en false',
+    ];
+}
+
+// 3d. Prueba real: ¿responde la ruta /login con el estilo de URL configurado?
+$probeUrl  = rtrim(BASE_URL, '/') . '/login';
+$probeCode = 0;
+if (function_exists('curl_init')) {
+    $ch = curl_init($probeUrl);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_NOBODY         => true,
+        CURLOPT_TIMEOUT        => 8,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_FOLLOWLOCATION => false,
+    ]);
+    curl_exec($ch);
+    $probeCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+} elseif (ini_get('allow_url_fopen')) {
+    $ctx = stream_context_create(['http' => ['method' => 'HEAD', 'timeout' => 8, 'ignore_errors' => true]]);
+    @file_get_contents($probeUrl, false, $ctx);
+    if (!empty($http_response_header[0]) && preg_match('#\s(\d{3})\s#', $http_response_header[0], $m)) {
+        $probeCode = (int) $m[1];
+    }
+}
+if ($probeCode > 0) {
+    $probeOk = ($probeCode >= 200 && $probeCode < 400);
+    $checks[] = [
+        'label'   => 'Ruta de inicio de sesión',
+        'value'   => $probeUrl . ' → HTTP ' . $probeCode,
+        'ok'      => $probeOk,
+        'message' => $probeOk
+            ? 'OK, el enrutador responde'
+            : 'El servidor no enruta: sube el .htaccess o pon PRETTY_URLS en false en config/config.php',
+    ];
+}
+
 // 4. DB Connection
 $dbOk      = false;
 $dbMessage = '';

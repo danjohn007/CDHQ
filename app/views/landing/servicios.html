@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0e85a5">
+    <meta name="description" content="Orientación, acompañamiento, talleres y difusión en materia de derechos humanos. Servicios gratuitos y voluntarios del Consejo de Derechos Humanos Querétaro.">
+    <title>Servicios | CDHQ – Consejo de Derechos Humanos Querétaro</title>
+    <link rel="icon" href="CDHQ%20VERTICAL.png">
+    <link rel="apple-touch-icon" href="CDHQ%20VERTICAL.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="cdhq.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="cdhq.css">
+
+    <!-- ─── Bloque crítico: va inline A PROPÓSITO ─────────────────────────────
+         No vive en cdhq.js ni en cdhq.css para que la página siga siendo
+         legible aunque esos archivos falten en el servidor o den error. -->
+    <script>
+        tailwind.config = { theme: { extend: { colors: {
+            brand: { 50:'#f0fbfd',100:'#dbf3fa',200:'#b6e7f2',300:'#82d5e8',400:'#3fb5d3',500:'#0e85a5',600:'#0c7290',700:'#0e5c75',800:'#124b60',900:'#143f51' },
+            leaf:  { 50:'#eefbee',100:'#d7f6d7',200:'#aeeaae',300:'#75d975',400:'#33c433',500:'#00ac00',600:'#009300',700:'#047604',800:'#085d08',900:'#094c09' }
+        } } } };
+    </script>
+    <style>
+        /* AOS deja todo en opacity:0 hasta inicializarse. Si su JS no carga,
+           la página entera se vería en blanco: esta regla la mantiene visible
+           hasta que cdhq.js confirma que AOS arrancó. */
+        html:not(.aos-ready) [data-aos] { opacity: 1 !important; transform: none !important; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <a href="https://wa.me/524423810010?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20servicios%20del%20CDHQ."
+       target="_blank" rel="noopener noreferrer"
+       class="whatsapp-float bg-leaf-500 text-white rounded-full p-4 shadow-lg hover:bg-leaf-600 transition-colors duration-200 flex items-center justify-center"
+       aria-label="WhatsApp">
+        <span class="whatsapp-pulse" aria-hidden="true"></span>
+        <i class="fab fa-whatsapp text-2xl relative z-10"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-brand-100 shadow-[0_2px_18px_-12px_rgba(14,133,165,0.6)]">
+        <div class="container mx-auto px-4 sm:px-6 py-3">
+            <div class="flex items-center justify-between gap-4">
+                <a href="index.html" class="flex items-center shrink-0" aria-label="CDHQ · Inicio">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="Consejo de Derechos Humanos Querétaro" class="h-9 sm:h-11 w-auto">
+                </a>
+                <nav class="hidden md:flex items-center gap-7 lg:gap-8 text-slate-600 font-medium text-sm lg:text-[0.95rem]">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                    <a href="nosotros.html" class="nav-link">Nosotros</a>
+                    <a href="derechos.html" class="nav-link">Derechos</a>
+                    <a href="servicios.html" class="nav-link is-active">Servicios</a>
+                    <a href="contacto.html" class="nav-link">Contacto</a>
+                    <a href="/sistema/" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm">
+                        <i class="fas fa-right-to-bracket text-xs"></i> Sistema
+                    </a>
+                </nav>
+                <button id="navToggle" type="button" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border border-brand-100 text-brand-600" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav id="mobileMenu" class="hidden md:hidden flex-col gap-1 pt-4 mt-4 border-t border-brand-100">
+                <a href="index.html" class="mobile-nav-link">Inicio</a>
+                <a href="nosotros.html" class="mobile-nav-link">Nosotros</a>
+                <a href="derechos.html" class="mobile-nav-link">Derechos</a>
+                <a href="servicios.html" class="mobile-nav-link is-active">Servicios</a>
+                <a href="contacto.html" class="mobile-nav-link">Contacto</a>
+                <a href="/sistema/" class="mobile-nav-link text-brand-700 font-semibold"><i class="fas fa-right-to-bracket mr-1"></i> Acceso al sistema</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Encabezado de página -->
+        <section class="page-hero py-16 md:py-24">
+            <div class="hero-blob absolute -top-28 -right-20 w-80 h-80 bg-brand-200/45 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="hero-blob hero-blob-delay absolute -bottom-24 -left-20 w-80 h-80 bg-leaf-200/40 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6 max-w-4xl text-center" data-aos="fade-up">
+                <nav class="text-sm text-slate-500 mb-5" aria-label="Ruta de navegación">
+                    <a href="index.html" class="hover:text-brand-600 transition-colors">Inicio</a>
+                    <span class="mx-2 text-slate-300">/</span>
+                    <span class="text-brand-600 font-medium">Servicios</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-800">
+                    Cómo te <span class="bg-gradient-to-r from-brand-500 to-leaf-500 bg-clip-text text-transparent">acompañamos</span>
+                </h1>
+                <p class="text-slate-600 text-lg mt-5 leading-relaxed">
+                    Todos nuestros servicios son <strong class="text-slate-800">gratuitos</strong> para quien los solicita
+                    y los realizan personas voluntarias comprometidas con la dignidad humana.
+                </p>
+            </div>
+        </section>
+
+        <!-- Servicios -->
+        <section class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7 max-w-6xl mx-auto">
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-7 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center mb-5"><i class="fas fa-comments text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-slate-800">Orientación y asesoría</h3>
+                        <p class="text-slate-500 mt-2.5 text-sm leading-relaxed">
+                            Escuchamos tu caso y te explicamos, sin tecnicismos, qué derechos te asisten, qué dice la ley
+                            y ante qué autoridad corresponde presentar tu asunto.
+                        </p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-7 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                        <div class="w-12 h-12 rounded-xl bg-leaf-50 border border-leaf-100 text-leaf-600 flex items-center justify-center mb-5"><i class="fas fa-people-carry-box text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-slate-800">Acompañamiento</h3>
+                        <p class="text-slate-500 mt-2.5 text-sm leading-relaxed">
+                            Te apoyamos durante el proceso: preparación de tu solicitud, seguimiento y acompañamiento
+                            ante las instancias correspondientes para que no enfrentes el trámite en soledad.
+                        </p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-7 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center mb-5"><i class="fas fa-chalkboard-user text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-slate-800">Talleres y formación</h3>
+                        <p class="text-slate-500 mt-2.5 text-sm leading-relaxed">
+                            Impartimos talleres de cultura de derechos humanos en escuelas, colonias, empresas y
+                            organizaciones, adaptados a la edad y al contexto del grupo.
+                        </p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-7 shadow-sm" data-aos="fade-up" data-aos-delay="250">
+                        <div class="w-12 h-12 rounded-xl bg-leaf-50 border border-leaf-100 text-leaf-600 flex items-center justify-center mb-5"><i class="fas fa-bullhorn text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-slate-800">Difusión</h3>
+                        <p class="text-slate-500 mt-2.5 text-sm leading-relaxed">
+                            Producimos y compartimos materiales claros sobre los derechos reconocidos en la Constitución,
+                            para que la información llegue a quien más la necesita.
+                        </p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-7 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 text-brand-600 flex items-center justify-center mb-5"><i class="fas fa-handshake text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-slate-800">Vinculación</h3>
+                        <p class="text-slate-500 mt-2.5 text-sm leading-relaxed">
+                            Como parte de la Red Nacional de Defensores, canalizamos y colaboramos con otros organismos
+                            civiles y públicos cuando un caso requiere atención especializada.
+                        </p>
+                    </div>
+                    <div class="glow-card bg-white border border-slate-200 rounded-2xl p-7 shadow-sm" data-aos="fade-up" data-aos-delay="350">
+                        <div class="w-12 h-12 rounded-xl bg-leaf-50 border border-leaf-100 text-leaf-600 flex items-center justify-center mb-5"><i class="fas fa-id-badge text-xl"></i></div>
+                        <h3 class="text-lg font-bold text-slate-800">Afiliación y voluntariado</h3>
+                        <p class="text-slate-500 mt-2.5 text-sm leading-relaxed">
+                            Quien desee sumarse a la labor del Consejo puede afiliarse, participar en nuestras
+                            actividades y recibir su credencial de colaborador voluntario.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cómo funciona -->
+        <section class="relative py-16 md:py-24 overflow-hidden" style="background:linear-gradient(180deg,#ffffff 0%,#f2fbfd 55%,#f0fbf4 100%);">
+            <div class="absolute inset-0 dot-grid opacity-60 pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-6xl mx-auto">
+                    <div data-aos="fade-right">
+                        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-leaf-600 mb-3">
+                            <span class="w-8 h-px bg-leaf-500"></span> Paso a paso
+                        </span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-800 leading-tight">Cómo solicitar orientación</h2>
+                        <p class="text-slate-600 mt-5 leading-relaxed">
+                            No necesitas cita previa ni ningún trámite complicado. Este es el camino habitual desde que
+                            nos escribes hasta que recibes acompañamiento.
+                        </p>
+                        <div class="mt-8 bg-white rounded-2xl p-6 border border-brand-100 shadow-sm">
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                <i class="fas fa-circle-info text-brand-500 mr-2"></i>
+                                Si tu situación implica <strong class="text-slate-800">riesgo inmediato para tu vida o
+                                integridad</strong>, acude o llama de inmediato a los servicios de emergencia
+                                <strong class="text-slate-800">911</strong>. Nuestro acompañamiento es complementario,
+                                no sustituye a las autoridades competentes.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="space-y-8" data-aos="fade-left" data-aos-delay="100">
+                        <div class="step-item">
+                            <span class="step-number">1</span>
+                            <h3 class="font-bold text-slate-800 pt-1.5">Nos escribes</h3>
+                            <p class="text-slate-500 text-sm mt-1.5 leading-relaxed">Por WhatsApp, teléfono o correo. Cuéntanos brevemente qué ocurrió, cuándo y quiénes intervinieron.</p>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">2</span>
+                            <h3 class="font-bold text-slate-800 pt-1.5">Escuchamos tu caso</h3>
+                            <p class="text-slate-500 text-sm mt-1.5 leading-relaxed">Agendamos una conversación para conocer los detalles y revisar la documentación con la que cuentas.</p>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">3</span>
+                            <h3 class="font-bold text-slate-800 pt-1.5">Te orientamos</h3>
+                            <p class="text-slate-500 text-sm mt-1.5 leading-relaxed">Te explicamos qué derecho está en juego, qué opciones tienes y ante qué instancia corresponde acudir.</p>
+                        </div>
+                        <div class="step-item">
+                            <span class="step-number">4</span>
+                            <h3 class="font-bold text-slate-800 pt-1.5">Damos seguimiento</h3>
+                            <p class="text-slate-500 text-sm mt-1.5 leading-relaxed">Te acompañamos en el proceso y, cuando el caso lo requiere, te canalizamos con la organización adecuada.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alcance del servicio -->
+        <section class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800">Alcance de nuestra labor</h2>
+                    <p class="text-slate-500 mt-3">Ser claros sobre nuestros límites también es una forma de proteger a quien nos busca.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <div class="rounded-2xl p-7 border border-leaf-200 bg-leaf-50/50" data-aos="fade-right">
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="w-10 h-10 rounded-full bg-leaf-500 text-white flex items-center justify-center"><i class="fas fa-check"></i></span>
+                            <h3 class="text-xl font-bold text-slate-800">Sí podemos</h3>
+                        </div>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Escucharte y orientarte sobre tus derechos, sin costo.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Explicarte a qué autoridad corresponde atender tu caso.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Acompañarte durante el proceso y dar seguimiento.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Canalizarte con organizaciones especializadas de la Red.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-check text-leaf-500 mt-0.5"></i><span>Impartir talleres y difundir cultura de derechos humanos.</span></li>
+                        </ul>
+                    </div>
+                    <div class="rounded-2xl p-7 border border-slate-200 bg-slate-50/70" data-aos="fade-left">
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="w-10 h-10 rounded-full bg-slate-400 text-white flex items-center justify-center"><i class="fas fa-xmark"></i></span>
+                            <h3 class="text-xl font-bold text-slate-800">No podemos</h3>
+                        </div>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Sustituir a un abogado en la representación legal de un juicio.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Emitir resoluciones, sanciones o recomendaciones vinculantes.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Realizar funciones de autoridad ni de investigación ministerial.</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Atender emergencias que requieren respuesta inmediata (911).</span></li>
+                            <li class="flex gap-3"><i class="fas fa-circle-xmark text-slate-400 mt-0.5"></i><span>Garantizar el resultado de un procedimiento ante terceros.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Talleres -->
+        <section class="relative py-16 md:py-20 overflow-hidden" style="background:linear-gradient(180deg,#f0fbf4 0%,#f2fbfd 100%);">
+            <div class="container relative mx-auto px-4 sm:px-6">
+                <div class="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-xl" data-aos="fade-up">
+                    <div class="grid md:grid-cols-5">
+                        <div class="md:col-span-3 p-8 sm:p-10 bg-white">
+                            <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-leaf-600 mb-3">
+                                <span class="w-8 h-px bg-leaf-500"></span> Para instituciones
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">¿Quieres un taller en tu escuela u organización?</h2>
+                            <p class="text-slate-600 mt-4 leading-relaxed text-sm sm:text-base">
+                                Llevamos sesiones de sensibilización y formación en derechos humanos a escuelas de todos
+                                los niveles, comités vecinales, empresas y dependencias. Adaptamos el contenido, la
+                                duración y el lenguaje al grupo que nos recibe.
+                            </p>
+                            <ul class="mt-5 space-y-2 text-sm text-slate-600">
+                                <li class="flex gap-2.5"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Derechos de niñas, niños y adolescentes</li>
+                                <li class="flex gap-2.5"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Igualdad y no discriminación</li>
+                                <li class="flex gap-2.5"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Derechos laborales</li>
+                                <li class="flex gap-2.5"><i class="fas fa-check text-leaf-500 mt-1 text-xs"></i> Prevención de la violencia y cultura de paz</li>
+                            </ul>
+                            <span class="magnetic-wrap mt-7">
+                                <a href="https://wa.me/524423810010?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20un%20taller%20de%20derechos%20humanos%20para%20mi%20instituci%C3%B3n."
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="magnetic-btn magnetic-solid inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-full font-medium transition-colors" style="--glow-color:#00ac00">
+                                    <span class="glow-layer" aria-hidden="true"></span>
+                                    <span class="btn-label"><i class="fab fa-whatsapp"></i> Solicitar un taller</span>
+                                </a>
+                            </span>
+                        </div>
+                        <div class="md:col-span-2 p-8 sm:p-10 flex flex-col items-center justify-center text-center text-white" style="background:linear-gradient(150deg,#0e85a5 0%,#0f8f52 100%);">
+                            <img src="CDHQ%20VERTICAL%20B.png" alt="CDHQ" class="w-28 mb-5">
+                            <p class="font-semibold text-lg">Sin costo</p>
+                            <p class="text-white/80 text-sm mt-2">Los talleres forman parte de nuestra labor voluntaria de difusión.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="relative py-20 text-white overflow-hidden" style="background:linear-gradient(135deg,#0e85a5 0%,#0b7d8e 55%,#0f8f52 100%);">
+            <div class="absolute -top-16 -right-16 w-72 h-72 bg-leaf-300/25 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="container relative mx-auto px-4 sm:px-6 text-center max-w-3xl" data-aos="fade-up">
+                <h2 class="text-3xl font-bold">Empecemos por escucharte</h2>
+                <p class="text-white/85 mt-3 mb-8">Escríbenos y cuéntanos tu situación. La primera orientación siempre es gratuita.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="magnetic-wrap">
+                        <a href="https://wa.me/524423810010?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20orientaci%C3%B3n%20del%20CDHQ."
+                           target="_blank" rel="noopener noreferrer"
+                           class="magnetic-btn magnetic-solid inline-flex items-center gap-2 bg-white text-brand-700 hover:text-brand-800 font-semibold px-7 py-3.5 rounded-full shadow-lg transition-colors" style="--glow-color:#00ac00">
+                            <span class="glow-layer" aria-hidden="true"></span>
+                            <span class="btn-label"><i class="fab fa-whatsapp text-xl text-leaf-500"></i> Escribir por WhatsApp</span>
+                        </a>
+                    </span>
+                    <span class="magnetic-wrap">
+                        <a href="contacto.html" class="magnetic-btn magnetic-outline inline-flex items-center gap-2 border border-white/40 hover:border-white text-white font-semibold px-7 py-3.5 rounded-full transition-colors" style="--glow-color:#ffffff">
+                            <span class="glow-layer" aria-hidden="true"></span>
+                            <span class="btn-label"><i class="fas fa-envelope"></i> Otras formas de contacto</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative pt-14 pb-10" style="background:linear-gradient(180deg,#f2fbfd 0%,#e9f6f1 100%);">
+        <div class="absolute top-0 left-0 right-0 h-1" style="background:linear-gradient(90deg,#0e85a5,#00ac00);"></div>
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid md:grid-cols-4 gap-10 md:gap-8">
+                <div class="md:col-span-2">
+                    <img src="CDHQ%20HORIZONTAL.png" alt="CDHQ" class="h-11 w-auto mb-4">
+                    <p class="text-slate-600 text-sm leading-relaxed max-w-sm">
+                        Consejo de Derechos Humanos Querétaro. Organismo civil independiente, sin fines de lucro,
+                        dedicado a la promoción, defensa y acompañamiento de los derechos humanos.
+                    </p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-colors" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-brand-100 text-brand-600 flex items-center justify-center hover:bg-leaf-500 hover:text-white hover:border-leaf-500 transition-colors" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Navegación</h3>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="index.html" class="text-slate-600 hover:text-brand-600 transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="text-slate-600 hover:text-brand-600 transition-colors">Nosotros</a></li>
+                        <li><a href="derechos.html" class="text-slate-600 hover:text-brand-600 transition-colors">Derechos humanos</a></li>
+                        <li><a href="servicios.html" class="text-slate-600 hover:text-brand-600 transition-colors">Servicios</a></li>
+                        <li><a href="contacto.html" class="text-slate-600 hover:text-brand-600 transition-colors">Contacto</a></li>
+                        <li><a href="/sistema/verificar" class="text-slate-600 hover:text-brand-600 transition-colors">Verificar credencial</a></li>
+                        <li><a href="aviso-de-privacidad.html" class="text-slate-600 hover:text-brand-600 transition-colors">Aviso de privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 mb-4">Contacto</h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex gap-2.5"><i class="fas fa-map-marker-alt text-brand-500 mt-1"></i><span>Paseo Constitución No. 100, Villas del Parque, Querétaro, Qro.</span></li>
+                        <li class="flex gap-2.5"><i class="fas fa-phone-alt text-brand-500 mt-1"></i><a href="tel:+524422956843" class="hover:text-brand-600 transition-colors">+52 442 295 6843</a></li>
+                        <li class="flex gap-2.5"><i class="fab fa-whatsapp text-leaf-500 mt-1"></i><a href="https://wa.me/524423810010" target="_blank" rel="noopener noreferrer" class="hover:text-leaf-600 transition-colors">+52 442 381 0010</a></li>
+                        <li class="flex gap-2.5"><i class="fas fa-envelope text-brand-500 mt-1"></i><a href="mailto:contacto@cdhq.digital" class="hover:text-brand-600 transition-colors">contacto@cdhq.digital</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-8 border-brand-100">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+                <p class="text-slate-500 text-sm">© 2026 Consejo de Derechos Humanos Querétaro · Todos los derechos reservados</p>
+                <p class="text-slate-500 text-sm">Organismo civil independiente · Apoyo voluntario</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>

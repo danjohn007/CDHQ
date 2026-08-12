@@ -1,12 +1,60 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Sistema CDHQ – reglas del front controller
+#
+# IMPORTANTE: este archivo empieza con punto, así que los gestores de archivos
+# (cPanel, FTP) lo ocultan por defecto y es MUY fácil olvidarlo al subir.
+# Si falta, /sistema/login responde 404 del servidor y el sistema no abre.
+# ─────────────────────────────────────────────────────────────────────────────
+
 Options -Indexes
-RewriteEngine On
+DirectoryIndex index.php
 
-# Allow direct access to existing static files only (css, js, images, etc.).
-# Directory names (e.g. /config/, /app/) must be forwarded to index.php so
-# that the PHP router can handle them; without this condition the web server
-# returns 403 Forbidden when a physical directory matches a virtual route.
-RewriteCond %{REQUEST_FILENAME} !-f
+# No servir archivos ocultos (.htaccess, .git, .env, etc.)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
 
-# Route everything through index.php (relative path: always resolves to the
-# directory where this .htaccess lives, regardless of subdirectory install)
-RewriteRule ^ index.php [QSA,L]
+# Nunca servir volcados de base de datos ni documentación interna
+<FilesMatch "\.(sql|md|log)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Si el sistema vive en un subdirectorio y el hosting no resuelve bien la
+    # ruta relativa de abajo, descomenta esta línea con la ruta correcta:
+    # RewriteBase /sistema
+
+    # Bloquear el acceso directo a los archivos internos de la aplicación.
+    # Sólo se bloquean ARCHIVOS (con extensión); las rutas virtuales como
+    # /config o /app siguen llegando al enrutador de PHP.
+    RewriteRule ^(config|core|app|sql)/.+\.(php|sql|md|inc|json)$ - [F,L]
+
+    # Permitir el acceso directo a archivos estáticos existentes (css, js,
+    # imágenes...). Los nombres de directorio (p. ej. /config/, /app/) SÍ se
+    # reenvían a index.php para que el enrutador de PHP los resuelva; sin esta
+    # condición el servidor devuelve 403 cuando un directorio físico coincide
+    # con una ruta virtual.
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # Todo lo demás pasa por index.php (ruta relativa: siempre resuelve al
+    # directorio donde vive este .htaccess, sin importar el subdirectorio)
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Si mod_rewrite NO está disponible, el sistema sigue funcionando usando
+# URLs del tipo /sistema/index.php/login. Para activarlas, pon
+# PRETTY_URLS en false dentro de config/config.php.
