@@ -1,0 +1,7 @@
+# Credenciales del servidor: copiar config.example.php a config.php y llenarlo.
+config.php
+error_log
+*.zip
+# Fotos de perfil y portadas subidas por usuarios.
+storage/*/*
+!storage/*/.htaccess

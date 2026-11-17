@@ -1,0 +1,59 @@
+CDHQ - Backend movil
+=====================
+
+QUE INCLUYE
+-----------
+  api-mobile/    Backend completo, para reemplazar la carpeta viva del servidor.
+  _migracion/    El SQL que hay que ejecutar en phpMyAdmin y este texto.
+
+NO incluye config.php ni storage/, a proposito: son tuyos y se conservan.
+
+
+INSTALACION
+-----------
+1. RESPALDAR lo que esta en linea.
+   En cPanel, sobre la carpeta api-mobile: Copy -> api-mobile_NN
+   (usa el siguiente numero libre). Queda como respaldo, igual que los demas.
+
+2. Subir este zip a /public_html/ y extraerlo ahi.
+   Se escribe sobre api-mobile/ y reemplaza el codigo.
+   config.php y storage/ NO se tocan: este paquete no los contiene, asi que
+   tus credenciales y las fotografias de perfil siguen intactas.
+
+3. Comprobar que .htaccess se haya subido dentro de api-mobile/.
+   Muchos gestores de archivos ocultan los que empiezan con punto. Activa
+   "Show hidden files" en Settings. Sin ese archivo, PHP no recibe la cabecera
+   Authorization y la aplicacion volvera a pedir la contrasena en cada apertura.
+
+4. En phpMyAdmin, ejecutar:
+       _migracion/07_add_sessions_and_notifications.sql
+
+   El orden entre los pasos 2 y 4 no importa: el codigo funciona con o sin la
+   migracion. Sin ella, la sesion persistente y las notificaciones quedan
+   inactivas, pero nadie se queda fuera de la aplicacion.
+
+5. Borrar la carpeta _migracion/ del servidor.
+
+6. Verificar: https://cdhq.digital/api-mobile/api/health.php
+
+
+SI ALGO SALE MAL
+----------------
+Renombrar api-mobile a api-mobile_fallido y renombrar el respaldo del paso 1
+de vuelta a api-mobile. La base de datos no necesita revertirse: la migracion
+solo agrega tablas nuevas y no modifica las existentes.
+
+
+CORREO (opcional)
+-----------------
+Los codigos para recuperar la contrasena se envian desde no-reply@ del dominio
+que atiende la peticion. Si prefieres otro remitente, agrega en config.php,
+antes de 'stripe' =>:
+
+    'mail' => [
+        'from_address' => 'no-reply@cdhq.digital',
+        'from_name' => 'CDHQ',
+    ],
+
+El buzon debe existir en cPanel, o los correos se iran a spam. Si el envio
+falla, el codigo queda registrado en el log de errores del servidor.

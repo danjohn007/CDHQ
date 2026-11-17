@@ -1,0 +1,36 @@
+Options -Indexes
+
+<FilesMatch "^config\.php$">
+  Require all denied
+</FilesMatch>
+
+# Respaldos, volcados y migraciones que pudieran quedar dentro de la carpeta.
+<FilesMatch "\.(sql|zip|bak|log|ini|env)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "no-referrer"
+</IfModule>
+
+# PHP en modo CGI/FastCGI no siempre recibe la cabecera Authorization, que es
+# la que sostiene la sesión persistente del dispositivo. Sin ella, la aplicación
+# vuelve a pedir correo y contraseña en cada apertura.
+#
+# Se usa únicamente SetEnvIf, que es seguro en cualquier versión de Apache y en
+# LiteSpeed. A propósito NO se incluyen aquí dos alternativas frecuentes:
+#
+#   - Un bloque RewriteEngine: activarlo en un subdirectorio cancela las reglas
+#     de reescritura heredadas del directorio padre y puede provocar 404 en
+#     archivos que antes se servían correctamente.
+#   - CGIPassAuth: sólo existe desde Apache 2.4.13. En versiones anteriores es
+#     una directiva desconocida y devuelve error 500 en toda la carpeta.
+#
+# bootstrap.php además lee la cabecera por otras dos vías
+# (REDIRECT_HTTP_AUTHORIZATION y apache_request_headers), así que en LiteSpeed
+# la sesión funciona incluso si este bloque no hiciera efecto.
+<IfModule mod_setenvif.c>
+  SetEnvIf Authorization "(.+)" HTTP_AUTHORIZATION=$1
+</IfModule>
